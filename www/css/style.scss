@@ -1,0 +1,75 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+html{
+  background-color: black;
+  body{
+    header{
+      margin-top: 0;
+      padding-top: 0;
+      height: 59dp;
+      background-image: linear-gradient(to bottom right,#FEC163, #DE4313);
+      h1{
+        font-size: 2rem;
+        // background-color: red;
+        color: white;
+        text-align: center;
+        padding-top: 15px;
+        position: relative;
+        height: 10px;
+        margin-top: 0;
+        vertical-align: center;
+        text-transform: uppercase;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      }
+      h1::before{
+        content:'';
+        background-image: url(../assets/imgs/png/logo.png);
+        position:relative; 
+        background-size: 50px 50px;
+        background-color: red;
+        left:-3px;
+        top:0px;
+        width: 50px;
+        height: 50px;
+      }
+    }
+    nav{
+      background-color: black;
+      position: fixed;
+      bottom: 0;
+      display: flex;
+      flex-flow: wrap row;
+      justify-content: center;
+      gap: 50px;
+      align-items: center;
+
+      a{
+        display: block;
+        width: 30px;
+        height: 30px;
+        background-size: contain;
+      }
+
+      #home{
+        background-image: url(../assets/imgs/svg/home.svg);
+      }
+
+      #search{
+        background-image: url(../assets/imgs/svg/search.svg);
+      }
+
+      #add{
+        background-image: url(../assets/imgs/svg/plus.svg);
+      }
+
+      #profile{
+        background-color: white;
+        border-radius: 50%;
+      }
+    }
+  }
+}
