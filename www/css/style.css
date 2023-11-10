@@ -2,6 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
 }
 
 html {
@@ -11,15 +12,20 @@ html body header {
   margin-top: 0;
   padding-top: 0;
   height: 59dp;
+  display: flex;
+  flex-flow: wrap row;
   background-image: linear-gradient(to bottom right, #FEC163, #DE4313);
 }
 html body header h1 {
   font-size: 2rem;
+  background-color: red;
   color: white;
   text-align: center;
   padding-top: 15px;
   position: relative;
   height: 10px;
+  width: -moz-fit-content;
+  width: fit-content;
   margin-top: 0;
   vertical-align: center;
   text-transform: uppercase;
@@ -29,8 +35,8 @@ html body header h1::before {
   content: "";
   background-image: url(../assets/imgs/png/logo.png);
   position: relative;
+  display: block;
   background-size: 50px 50px;
-  background-color: red;
   left: -3px;
   top: 0px;
   width: 50px;
@@ -64,4 +70,126 @@ html body nav #add {
 html body nav #profile {
   background-color: white;
   border-radius: 50%;
+}
+html body #log {
+  color: white;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  z-index: 100000;
+  display: none;
+  top: 0;
+  position: absolute;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  flex-flow: wrap;
+  justify-content: center;
+  align-items: center;
+}
+html body #log #logchoice {
+  margin-top: 10vh;
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+}
+html body #log #logchoice button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  transition: left 0.3s ease;
+}
+html body #log #logchoice #btnsign {
+  opacity: 0.6;
+}
+html body #log #logchoice #btnlog::after {
+  opacity: 1;
+}
+html body #log #logchoice .normal::after {
+  content: "";
+  width: 70px;
+  height: 2px;
+  display: block;
+  background-color: white;
+  position: relative;
+  top: 5px;
+  left: 0;
+  transition: left 0.3s ease;
+}
+html body #log #logchoice .active::after {
+  content: "";
+  width: 70px;
+  height: 2px;
+  display: block;
+  background-color: white;
+  position: relative;
+  top: 5px;
+  left: 90px;
+  transition: left 0.3s ease;
+}
+html body #log section {
+  height: 100vh;
+  display: flex;
+  flex-flow: wrap column;
+  top: 15vh;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  gap: 20px;
+  position: absolute;
+  left: 6vw;
+  transition: left 0.3s ease;
+}
+html body #log section h3 {
+  text-align: center;
+}
+html body #log section .logSubmit {
+  text-decoration: none;
+  color: black;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 88vw;
+  border: none;
+  opacity: 0.6;
+}
+html body #log section form {
+  display: flex;
+  gap: 10px;
+  flex-flow: wrap column;
+}
+html body #log section input {
+  color: white;
+  width: 85vw;
+  background-color: #262626;
+  border: none;
+  border-radius: 10px;
+  padding-left: 10px;
+}
+html body #log #logSub {
+  pointer-events: none;
+}
+html body #log #signSub {
+  background-color: #ff7a00;
+  pointer-events: none;
+}
+html body #log .inscription {
+  left: 100vw;
+}
+html body #log .connexion {
+  left: -100vw;
+}
+html body main button {
+  margin-top: 10vh;
+  background-color: red;
+  padding: 20px;
+  color: white;
+  border-radius: 10px;
+  border: none;
 }/*# sourceMappingURL=style.css.map */

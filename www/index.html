@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="fr" dir="ltr">
 
-  <head>
+<head>
     <meta charset="UTF-8" />
     <title>TopFood</title>
     <meta name="viewport"
-      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
 
@@ -14,27 +14,57 @@
     <link rel="manifest" href="./manifest.json" />
     <link rel="stylesheet" href="./css/style.css" />
     <meta name="theme-color" content="#31d53d" />
+    <script src="./js/main.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="./topfood.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <header>
-      <h1>Topfood</h1>
-      <button></button>
+        <h1>Topfood</h1>
+        <button></button>
     </header>
-    <main>
 
+    <section id="log">
+        <div id="logchoice">
+            <button class="normal" id="btnlog">Connexion</button>
+            <button id="btnsign">Inscription</button>
+        </div>
+
+        <section id="connexion">
+            <h3>Connexion</h3>
+            <form>
+                <input id="login" type="email" placeholder="Email">
+                <input id="password" type="password" minlength="6" placeholder="Mot de passe">
+                <input class="logSubmit" onclick="logIn(event)" id="logSub" type="submit" value="Se connecter">
+            </form>
+        </section>
+
+        <section id="inscription" class="inscription">
+            <h3>Inscription</h3>
+            <form>
+                <input id="mail" type="email" placeholder="Email">
+                <input id="logPassword" type="password" minlength="6" placeholder="Mot de passe">
+                <input class="logSubmit" onclick="signIn(event)" id="signSub" type="submit" value="S'inscrire">
+            </form>
+            <p></p>
+        </section>
+    </section>
+
+    <main>
+        <button id="btnLogOut">Déconnexion</button>
     </main>
     <nav>
-      <a href="" id="home"></a>
-      <a href="" id="search"></a>
-      <a href="" id="add"></a>
-      <a href="" id="profile"></a>
+        <a href="" id="home"></a>
+        <a href="" id="search"></a>
+        <a href="" id="add"></a>
+        <a href="" id="profile"></a>
     </nav>
-  </body>
+</body>
 
 </html>

@@ -13,13 +13,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@capacitor/camera": "latest",
+    "@capacitor/camera": "^5.0.7",
     "@capacitor/core": "^5.5.1",
     "@capacitor/splash-screen": "latest"
   },
   "devDependencies": {
     "@capacitor/cli": "^5.5.1",
-    "vite": "^2.9.13"
+    "vite": "^2.9.13",
+    "webpack-cli": "^5.1.4"
   },
   "author": "",
   "license": "ISC"
