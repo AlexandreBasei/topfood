@@ -98,6 +98,7 @@ html body #log #logchoice {
   top: 0;
 }
 html body #log #logchoice button {
+  font-size: 1.5em;
   background-color: transparent;
   color: white;
   border: none;
@@ -111,7 +112,7 @@ html body #log #logchoice #btnlog::after {
 }
 html body #log #logchoice .normal::after {
   content: "";
-  width: 70px;
+  width: 100px;
   height: 2px;
   display: block;
   background-color: white;
@@ -122,13 +123,13 @@ html body #log #logchoice .normal::after {
 }
 html body #log #logchoice .active::after {
   content: "";
-  width: 70px;
+  width: 100px;
   height: 2px;
   display: block;
   background-color: white;
   position: relative;
   top: 5px;
-  left: 90px;
+  left: 120px;
   transition: left 0.3s ease;
 }
 html body #log section {
@@ -176,7 +177,7 @@ html body #log #logSub {
   pointer-events: none;
 }
 html body #log #signSub {
-  background-color: #ff7a00;
+  background-color: #0099ff;
   pointer-events: none;
 }
 html body #log .inscription {
@@ -184,6 +185,25 @@ html body #log .inscription {
 }
 html body #log .connexion {
   left: -100vw;
+}
+html body #connexionPopup {
+  display: none;
+  flex-flow: wrap row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100vw;
+  pointer-events: none;
+  opacity: 0.8;
+}
+html body #connexionPopup p {
+  width: -moz-fit-content;
+  width: fit-content;
+  color: rgb(0, 190, 0);
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
 }
 html body main button {
   margin-top: 10vh;

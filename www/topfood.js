@@ -20,17 +20,18 @@ const logIn = (event) => {
         let errorMessage = error.message;
         // une erreur est survenue dans l’authentification
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-            .then( () => {
-                console.log("connecté !");
+            .then(() => {
+                // console.log("connecté !");
+                document.querySelector("#connexion p").textContent = "";
                 return firebase.auth().signInWithEmailAndPassword(login, password);
             })
             .catch((error) => {
                 let errorCode = error.code;
                 let errorMessage = error.message;
+                document.querySelector("#connexion p").style.color = "red";
+                document.querySelector("#connexion p").textContent = "Adresse email ou mot de passe incorrects";
                 // une erreur est survenue dans la persistence
             });
-    }).then( () => {
-        console.log("connecté !");
     });
 }
 
@@ -39,31 +40,31 @@ const signIn = (event) => {
     let mail = $("#mail").val();
     let logPassword = $("#logPassword").val();
     firebase.auth().createUserWithEmailAndPassword(mail, logPassword)
-    .then( () => {
-        document.querySelector("#inscription p").style.color = "green";
-        document.querySelector("#inscription p").textContent = "Inscription réussie !";
-    })
-    .catch( (error) => {
-        let errorCode = error.code;
-        let errorMessage = error.message;
-        document.querySelector("#inscription p").style.color = "red";
-        document.querySelector("#inscription p").textContent = "Une erreur est survenue lors de l'inscription";
-        // une erreur est survenue
-    })
+        .then(() => {
+            document.querySelector("#inscription p").style.color = "green";
+            document.querySelector("#inscription p").textContent = "Inscription réussie !";
+        })
+        .catch((error) => {
+            let errorCode = error.code;
+            let errorMessage = error.message;
+            document.querySelector("#inscription p").style.color = "red";
+            document.querySelector("#inscription p").textContent = "Une erreur est survenue lors de l'inscription";
+            // une erreur est survenue
+        })
 }
 
 firebase.initializeApp(config);
 let database = firebase.database();
 
-firebase.auth().onAuthStateChanged( (user) => {
+firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      // L'utilisateur est connecté
-      document.getElementById("log").style.display = "none";
+        // L'utilisateur est connecté
+        document.getElementById("log").style.display = "none";
     } else {
-      // Aucun utilisateur n'est connecté
-      document.getElementById("log").style.display = "flex";
+        // Aucun utilisateur n'est connecté
+        document.getElementById("log").style.display = "flex";
     }
-  });
+});
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -148,6 +149,11 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     document.getElementById("btnLogOut").addEventListener('click', () => {
-        firebase.auth().signOut()
+        document.querySelector("#connexion p").textContent = "";
+        login.value = "";
+        password.value = "";
+        mail.value = "";
+        logPassword.value = "";
+        firebase.auth().signOut();
     });
 });

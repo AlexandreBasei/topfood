@@ -26,6 +26,7 @@
 
 <body>
     <header>
+        <img src="./assets/imgs/png/logo.png" alt="logo topfood">
         <h1>Topfood</h1>
         <button></button>
     </header>
@@ -43,6 +44,7 @@
                 <input id="password" type="password" minlength="6" placeholder="Mot de passe">
                 <input class="logSubmit" onclick="logIn(event)" id="logSub" type="submit" value="Se connecter">
             </form>
+            <p></p>
         </section>
 
         <section id="inscription" class="inscription">
@@ -55,6 +57,10 @@
             <p></p>
         </section>
     </section>
+    
+    <div id="connexionPopup">
+        <p>Connecté en tant que :</p>
+    </div>
 
     <main>
         <button id="btnLogOut">Déconnexion</button>
