@@ -1,0 +1,180 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+html {
+  background-color: rgb(16, 16, 16);
+}
+html body #log {
+  color: rgb(202, 202, 202);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(16, 16, 16);
+  z-index: 100000;
+  display: none;
+  top: 0;
+  position: absolute;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  flex-flow: wrap;
+  justify-content: center;
+  align-items: center;
+}
+html body #log #logchoice {
+  margin-top: 10vh;
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+}
+html body #log #logchoice button {
+  font-size: 1.5em;
+  background-color: transparent;
+  color: rgb(202, 202, 202);
+  border: none;
+  transition: left 0.3s ease;
+}
+html body #log #logchoice #btnsign {
+  opacity: 0.6;
+}
+html body #log #logchoice #btnlog::after {
+  opacity: 1;
+}
+html body #log #logchoice .normal::after {
+  content: "";
+  width: 115px;
+  height: 2px;
+  display: block;
+  background-color: rgb(202, 202, 202);
+  position: relative;
+  top: 5px;
+  left: 0;
+  transition: left 0.3s ease;
+}
+html body #log #logchoice .active::after {
+  content: "";
+  width: 115px;
+  height: 2px;
+  display: block;
+  background-color: rgb(202, 202, 202);
+  position: relative;
+  top: 5px;
+  left: 135px;
+  transition: left 0.3s ease;
+}
+html body #log section {
+  height: 100vh;
+  display: flex;
+  flex-flow: wrap column;
+  top: 15vh;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  gap: 20px;
+  position: absolute;
+  left: 6vw;
+  transition: left 0.3s ease;
+}
+html body #log section h3 {
+  text-align: center;
+  margin-top: 5vh;
+  font-family: Arial, sans-serif;
+}
+html body #log section .logSubmit {
+  text-decoration: none;
+  color: rgb(16, 16, 16);
+  padding: 15px;
+  border-radius: 15px;
+  background-color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 88vw;
+  border: none;
+  opacity: 0.6;
+}
+html body #log section form {
+  display: flex;
+  gap: 10px;
+  flex-flow: wrap column;
+  margin-top: 8vh;
+}
+html body #log section input {
+  color: rgb(202, 202, 202);
+  width: 85vw;
+  background-color: #262626;
+  border: none;
+  border-radius: 10px;
+  padding: 2vh 0 2vh 10px;
+}
+html body #log #logSub {
+  pointer-events: none;
+}
+html body #log #signSub {
+  background-color: #0099ff;
+  pointer-events: none;
+}
+html body #log .inscription {
+  left: 100vw;
+}
+html body #log .connexion {
+  left: -100vw;
+}
+html body #connexionPopup {
+  display: none;
+  flex-flow: wrap row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100vw;
+  pointer-events: none;
+  opacity: 0.8;
+}
+html body #connexionPopup p {
+  width: -moz-fit-content;
+  width: fit-content;
+  color: rgb(0, 190, 0);
+  background-color: rgb(202, 202, 202);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+}
+html body nav {
+  background-color: rgb(16, 16, 16);
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+  gap: 50px;
+  align-items: center;
+  width: 100vw;
+  height: 60px;
+}
+html body nav a {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+}
+html body nav #home {
+  background-image: url(../assets/imgs/svg/home.svg);
+}
+html body nav #search {
+  background-image: url(../assets/imgs/svg/search.svg);
+}
+html body nav #add {
+  background-image: url(../assets/imgs/svg/plus.svg);
+}
+html body nav #profile {
+  border-radius: 50%;
+  border: none;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+}/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,213 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+$fond : rgb(16, 16, 16);
+$blanc: rgb(202, 202, 202);
+$input : #262626;
+$boutons : #0099ff;
+
+html {
+    background-color: $fond;
+
+    body{
+
+        #log {
+            color: $blanc;
+            width: 100vw;
+            height: 100vh;
+            background-color: $fond;
+            z-index: 100000;
+            display: none;
+            top: 0;
+            position: absolute;
+            overflow-y: hidden;
+            overflow-x: hidden;
+            flex-flow: wrap;
+            justify-content: center;
+            align-items: center;
+
+            #logchoice {
+                margin-top: 10vh;
+                display: flex;
+                flex-flow: wrap row;
+                justify-content: center;
+                gap: 10px;
+                align-items: center;
+                width: 100vw;
+                position: absolute;
+                top: 0;
+
+                button {
+                    font-size: 1.5em;
+                    background-color: transparent;
+                    color: $blanc;
+                    border: none;
+                    transition: left 0.3s ease;
+                }
+
+                #btnsign {
+                    opacity: 0.6;
+                }
+
+                #btnlog::after {
+                    opacity: 1;
+                }
+
+                .normal::after {
+                    content: '';
+                    width: 115px;
+                    height: 2px;
+                    display: block;
+                    background-color: $blanc;
+                    position: relative;
+                    top: 5px;
+                    left: 0;
+                    transition: left 0.3s ease;
+                }
+
+                .active::after {
+                    content: '';
+                    width: 115px;
+                    height: 2px;
+                    display: block;
+                    background-color: $blanc;
+                    position: relative;
+                    top: 5px;
+                    left: 135px;
+                    transition: left 0.3s ease;
+                }
+
+            }
+
+            section {
+                height: 100vh;
+                display: flex;
+                flex-flow: wrap column;
+                top: 15vh;
+                align-items: center;
+                align-content: center;
+                text-align: center;
+                gap: 20px;
+                position: absolute;
+                left: 6vw;
+                transition: left 0.3s ease;
+
+                h3 {
+                    text-align: center;
+                    margin-top: 5vh;
+                    font-family: Arial, sans-serif;
+                }
+
+                .logSubmit {
+                    text-decoration: none;
+                    color: $fond;
+                    padding: 15px;
+                    border-radius: 15px;
+                    background-color: #fff;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    width: 88vw;
+                    border: none;
+                    opacity: 0.6;
+                }
+
+                form {
+                    display: flex;
+                    gap: 10px;
+                    flex-flow: wrap column;
+                    margin-top: 8vh;
+                }
+
+                input {
+                    color: $blanc;
+                    width: 85vw;
+                    background-color: $input;
+                    border: none;
+                    border-radius: 10px;
+                    padding: 2vh 0 2vh 10px;
+                }
+            }
+
+            #logSub{
+                pointer-events: none;
+            }
+
+            #signSub{
+                background-color: $boutons;
+                pointer-events: none;
+            }
+            
+            .inscription {
+                left: 100vw;
+            }
+
+            .connexion {
+                left: -100vw;
+            }
+        }
+
+        #connexionPopup{
+            // display: flex;
+            display: none;
+            flex-flow: wrap row;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            width: 100vw;
+            pointer-events: none;
+            opacity: 0.8;
+            p{
+                width: fit-content;
+                color: rgb(0, 190, 0);
+                background-color: $blanc;
+                border-radius: 10px;
+                padding: 15px;
+                text-align: center;
+            }
+        }
+        
+        nav {
+            background-color: $fond;
+            position: fixed;
+            bottom: 0;
+            display: flex;
+            flex-flow: wrap row;
+            justify-content: center;
+            gap: 50px;
+            align-items: center;
+            width: 100vw;
+            height: 60px;
+
+            a {
+                display: block;
+                width: 30px;
+                height: 30px;
+                background-size: contain;
+            }
+
+            #home {
+                background-image: url(../assets/imgs/svg/home.svg);
+            }
+
+            #search {
+                background-image: url(../assets/imgs/svg/search.svg);
+            }
+
+            #add {
+                background-image: url(../assets/imgs/svg/plus.svg);
+            }
+
+            #profile {
+                border-radius: 50%;
+                border: none;
+                width: 30px;
+                height: 30px;
+                background-size: contain;
+            }
+
+        }
+    }
+}

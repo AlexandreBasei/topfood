@@ -1,37 +1,31 @@
-html,
-body {
-    padding: 0;
-    margin: 0;
-    overflow-x: hidden;
-}
+@import url(./main.css);
 
-$fond : black;
+$fond : rgb(16, 16, 16);
+$blanc: rgb(202, 202, 202);
 $input : #262626;
 $boutons : #0099ff;
 
 html {
-    background-color: $fond;
 
     body {
         header {
             margin-top: 0;
             padding-top: 0;
-            height: 59dp;
+            height: 8vh;
             display: flex;
             flex-flow: wrap row;
+            align-items: center;
+            justify-content: center;
             background-image: linear-gradient(to bottom right, #FEC163, #DE4313);
 
             h1 {
                 font-size: 2rem;
-                background-color: red;
-                color: white;
+                color: rgb(230, 229, 229);
                 text-align: center;
-                padding-top: 15px;
                 position: relative;
-                height: 10px;
+                // height: 10px;
                 width: fit-content;
-                margin-top: 0;
-                vertical-align: center;
+                margin: 0 0 0 5vw;
                 text-transform: uppercase;
                 font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             }
@@ -39,201 +33,25 @@ html {
             h1::before {
                 content: '';
                 background-image: url(../assets/imgs/png/logo.png);
-                position: relative;
-                display: block;
-                background-size: 50px 50px;
-                left: -3px;
-                top: 0px;
-                width: 50px;
-                height: 50px;
-            }
-        }
-
-        nav {
-            background-color: $fond;
-            position: fixed;
-            bottom: 0;
-            display: flex;
-            flex-flow: wrap row;
-            justify-content: center;
-            gap: 50px;
-            align-items: center;
-
-            a {
-                display: block;
-                width: 30px;
-                height: 30px;
-                background-size: contain;
-            }
-
-            #home {
-                background-image: url(../assets/imgs/svg/home.svg);
-            }
-
-            #search {
-                background-image: url(../assets/imgs/svg/search.svg);
-            }
-
-            #add {
-                background-image: url(../assets/imgs/svg/plus.svg);
-            }
-
-            #profile {
-                background-color: white;
-                border-radius: 50%;
-            }
-
-        }
-
-        #log {
-            color: white;
-            width: 100vw;
-            height: 100vh;
-            background-color: $fond;
-            z-index: 100000;
-            display: none;
-            top: 0;
-            position: absolute;
-            overflow-y: hidden;
-            overflow-x: hidden;
-            flex-flow: wrap;
-            justify-content: center;
-            align-items: center;
-
-            #logchoice {
-                margin-top: 10vh;
-                display: flex;
-                flex-flow: wrap row;
-                justify-content: center;
-                gap: 10px;
-                align-items: center;
-                width: 100vw;
                 position: absolute;
-                top: 0;
-
-                button {
-                    font-size: 1.5em;
-                    background-color: transparent;
-                    color: white;
-                    border: none;
-                    transition: left 0.3s ease;
-                }
-
-                #btnsign {
-                    opacity: 0.6;
-                }
-
-                #btnlog::after {
-                    opacity: 1;
-                }
-
-                .normal::after {
-                    content: '';
-                    width: 100px;
-                    height: 2px;
-                    display: block;
-                    background-color: white;
-                    position: relative;
-                    top: 5px;
-                    left: 0;
-                    transition: left 0.3s ease;
-                }
-
-                .active::after {
-                    content: '';
-                    width: 100px;
-                    height: 2px;
-                    display: block;
-                    background-color: white;
-                    position: relative;
-                    top: 5px;
-                    left: 120px;
-                    transition: left 0.3s ease;
-                }
-
+                display: block;
+                background-size: 40px 40px;
+                left: -50px;
+                width: 40px;
+                height: 40px;
             }
 
-            section {
-                height: 100vh;
-                display: flex;
-                flex-flow: wrap column;
-                top: 15vh;
-                align-items: center;
-                align-content: center;
-                text-align: center;
-                gap: 20px;
+            button{
                 position: absolute;
-                left: 6vw;
-                transition: left 0.3s ease;
-
-                h3 {
-                    text-align: center;
-                }
-
-                .logSubmit {
-                    text-decoration: none;
-                    color: $fond;
-                    padding: 15px;
-                    border-radius: 15px;
-                    background-color: #fff;
-                    text-transform: uppercase;
-                    font-weight: bold;
-                    width: 88vw;
-                    border: none;
-                    opacity: 0.6;
-                }
-
-                form {
-                    display: flex;
-                    gap: 10px;
-                    flex-flow: wrap column;
-                }
-
-                input {
-                    color: white;
-                    width: 85vw;
-                    background-color: $input;
-                    border: none;
-                    border-radius: 10px;
-                    padding-left: 10px;
-                }
-            }
-
-            #logSub{
-                pointer-events: none;
-            }
-
-            #signSub{
-                background-color: $boutons;
-                pointer-events: none;
-            }
-            
-            .inscription {
-                left: 100vw;
-            }
-
-            .connexion {
-                left: -100vw;
-            }
-        }
-
-        #connexionPopup{
-            // display: flex;
-            display: none;
-            flex-flow: wrap row;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            width: 100vw;
-            pointer-events: none;
-            opacity: 0.8;
-            p{
-                width: fit-content;
-                color: rgb(0, 190, 0);
-                background-color: white;
-                border-radius: 10px;
-                padding: 15px;
-                text-align: center;
+                left: 88vw;
+                border: none;
+                background-color: transparent;
+                background-image: url(../assets/imgs/svg/bell.svg);
+                background-repeat: no-repeat;
+                background-size: contain;                width: 40px;
+                height: 25px;
+                width: 25px;
+                user-select: none;
             }
         }
 
@@ -242,7 +60,7 @@ html {
                 margin-top: 10vh;
                 background-color: red;
                 padding: 20px;
-                color: white;
+                color: $blanc;
                 border-radius: 10px;
                 border: none;
             }

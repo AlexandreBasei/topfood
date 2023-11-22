@@ -1,215 +1,55 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  overflow-x: hidden;
-}
-
-html {
-  background-color: black;
-}
+@import url(./main.css);
 html body header {
   margin-top: 0;
   padding-top: 0;
-  height: 59dp;
+  height: 8vh;
   display: flex;
   flex-flow: wrap row;
+  align-items: center;
+  justify-content: center;
   background-image: linear-gradient(to bottom right, #FEC163, #DE4313);
 }
 html body header h1 {
   font-size: 2rem;
-  background-color: red;
-  color: white;
+  color: rgb(230, 229, 229);
   text-align: center;
-  padding-top: 15px;
   position: relative;
-  height: 10px;
   width: -moz-fit-content;
   width: fit-content;
-  margin-top: 0;
-  vertical-align: center;
+  margin: 0 0 0 5vw;
   text-transform: uppercase;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 html body header h1::before {
   content: "";
   background-image: url(../assets/imgs/png/logo.png);
-  position: relative;
-  display: block;
-  background-size: 50px 50px;
-  left: -3px;
-  top: 0px;
-  width: 50px;
-  height: 50px;
-}
-html body nav {
-  background-color: black;
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  flex-flow: wrap row;
-  justify-content: center;
-  gap: 50px;
-  align-items: center;
-}
-html body nav a {
-  display: block;
-  width: 30px;
-  height: 30px;
-  background-size: contain;
-}
-html body nav #home {
-  background-image: url(../assets/imgs/svg/home.svg);
-}
-html body nav #search {
-  background-image: url(../assets/imgs/svg/search.svg);
-}
-html body nav #add {
-  background-image: url(../assets/imgs/svg/plus.svg);
-}
-html body nav #profile {
-  background-color: white;
-  border-radius: 50%;
-}
-html body #log {
-  color: white;
-  width: 100vw;
-  height: 100vh;
-  background-color: black;
-  z-index: 100000;
-  display: none;
-  top: 0;
   position: absolute;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  flex-flow: wrap;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  background-size: 40px 40px;
+  left: -50px;
+  width: 40px;
+  height: 40px;
 }
-html body #log #logchoice {
-  margin-top: 10vh;
-  display: flex;
-  flex-flow: wrap row;
-  justify-content: center;
-  gap: 10px;
-  align-items: center;
-  width: 100vw;
+html body header button {
   position: absolute;
-  top: 0;
-}
-html body #log #logchoice button {
-  font-size: 1.5em;
+  left: 88vw;
+  border: none;
   background-color: transparent;
-  color: white;
-  border: none;
-  transition: left 0.3s ease;
-}
-html body #log #logchoice #btnsign {
-  opacity: 0.6;
-}
-html body #log #logchoice #btnlog::after {
-  opacity: 1;
-}
-html body #log #logchoice .normal::after {
-  content: "";
-  width: 100px;
-  height: 2px;
-  display: block;
-  background-color: white;
-  position: relative;
-  top: 5px;
-  left: 0;
-  transition: left 0.3s ease;
-}
-html body #log #logchoice .active::after {
-  content: "";
-  width: 100px;
-  height: 2px;
-  display: block;
-  background-color: white;
-  position: relative;
-  top: 5px;
-  left: 120px;
-  transition: left 0.3s ease;
-}
-html body #log section {
-  height: 100vh;
-  display: flex;
-  flex-flow: wrap column;
-  top: 15vh;
-  align-items: center;
-  align-content: center;
-  text-align: center;
-  gap: 20px;
-  position: absolute;
-  left: 6vw;
-  transition: left 0.3s ease;
-}
-html body #log section h3 {
-  text-align: center;
-}
-html body #log section .logSubmit {
-  text-decoration: none;
-  color: black;
-  padding: 15px;
-  border-radius: 15px;
-  background-color: #fff;
-  text-transform: uppercase;
-  font-weight: bold;
-  width: 88vw;
-  border: none;
-  opacity: 0.6;
-}
-html body #log section form {
-  display: flex;
-  gap: 10px;
-  flex-flow: wrap column;
-}
-html body #log section input {
-  color: white;
-  width: 85vw;
-  background-color: #262626;
-  border: none;
-  border-radius: 10px;
-  padding-left: 10px;
-}
-html body #log #logSub {
-  pointer-events: none;
-}
-html body #log #signSub {
-  background-color: #0099ff;
-  pointer-events: none;
-}
-html body #log .inscription {
-  left: 100vw;
-}
-html body #log .connexion {
-  left: -100vw;
-}
-html body #connexionPopup {
-  display: none;
-  flex-flow: wrap row;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  width: 100vw;
-  pointer-events: none;
-  opacity: 0.8;
-}
-html body #connexionPopup p {
-  width: -moz-fit-content;
-  width: fit-content;
-  color: rgb(0, 190, 0);
-  background-color: white;
-  border-radius: 10px;
-  padding: 15px;
-  text-align: center;
+  background-image: url(../assets/imgs/svg/bell.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 40px;
+  height: 25px;
+  width: 25px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 html body main button {
   margin-top: 10vh;
   background-color: red;
   padding: 20px;
-  color: white;
+  color: rgb(202, 202, 202);
   border-radius: 10px;
   border: none;
 }/*# sourceMappingURL=style.css.map */

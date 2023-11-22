@@ -1,0 +1,17 @@
+@import url(./main.css);
+html body main {
+  color: rgb(202, 202, 202);
+  font-family: Arial, sans-serif;
+}
+html body main #ppContainer {
+  margin: 8vh 0 0 0;
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+  align-items: center;
+}
+html body main #ppContainer #pp {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}/*# sourceMappingURL=profil.css.map */

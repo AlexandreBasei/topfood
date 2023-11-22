@@ -1,0 +1,27 @@
+@import url(./main.css);
+
+$fond : rgb(16, 16, 16);
+$blanc: rgb(202, 202, 202);
+$input : #262626;
+$boutons : #0099ff;
+
+html {
+    body {
+        main {
+            color: $blanc;
+            font-family: Arial, sans-serif;
+            #ppContainer {
+                margin: 8vh 0 0 0;
+                display: flex;
+                flex-flow: wrap row;
+                justify-content: center;
+                align-items: center;
+                #pp {
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+}

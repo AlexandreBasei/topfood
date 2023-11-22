@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="fr">
 
 <head>
-    <meta charset="UTF-8" />
-    <title>TopFood</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre profil</title>
     <meta name="viewport"
         content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
@@ -12,23 +13,14 @@
 
     <link rel="icon" type="image/x-icon" href="./assets/icon/favicon.ico" />
     <link rel="manifest" href="./manifest.json" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <meta name="theme-color" content="#31d53d" />
-    <script src="./js/main.js"></script>
+    <link rel="stylesheet" href="./css/profil.css">
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="./js/main.js"></script>
     <script src="./connexion.js"></script>
-    <script src="./topfood.js"></script>
-    
+    <script src="./profil.js"></script>
 </head>
 
 <body>
-    <header>
-        <!-- <img src="./assets/imgs/png/logo.png" alt="logo topfood"> -->
-        <h1>Topfood</h1>
-        <button></button>
-    </header>
-
     <section id="log">
         <div id="logchoice">
             <button class="normal" id="btnlog">Connexion</button>
@@ -53,19 +45,24 @@
             <p></p>
         </section>
     </section>
-    
-    <div id="connexionPopup">
-        <p>Connecté en tant que :</p>
-    </div>
 
     <main>
-        <button id="btnLogOut">Déconnexion</button>
+        <div id="ppContainer">
+            <img id="pp" src="./assets/imgs/svg/defaultpp.svg">
+            <h2 id="name"></h2>
+            <h3 id="publi"></h3>
+            <h3 id="follow"></h3>
+        </div>
+
+        <p id="desc"></p>
+
+
     </main>
     <nav>
         <a href="index.html" id="home"></a>
         <a href="" id="search"></a>
         <a href="" id="add"></a>
-        <button id="profile"></button>
+        <a href="./profil.html" id="profile"></a>
     </nav>
 </body>
 
