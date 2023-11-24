@@ -64,22 +64,39 @@ firebase.auth().onAuthStateChanged((user) => {
 
             if (snapshot.exists() == false) {
                 ref.set({
-                    img: './assets/imgs/svg/defaultpp.svg',
                     name: 'Utilisateur',
                     desc: 'Bienvenue sur mon profil !',
                     posts: 0,
                     followers: 0,
                 })
+                let storageRef = firebase.storage().ref().child('users/' + userId);
+
+                let uploadTask = storageRef.putString('data:image/jpg;base64,./assets/imgs/svg/defaultpp.svg', 'data_url');
+
+                uploadTask.on('state_changed',
+                    (snapshot) => {
+                        // Suivi de la progression du téléchargement ici (optionnel)
+                    },
+                    (error) => {
+                        // Gestion des erreurs de téléchargement ici
+                    },
+                    () => {
+                        // Le téléchargement est terminé avec succès
+                        // Vous pouvez obtenir l'URL de téléchargement ici
+                        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                            // Utilisez l'URL de téléchargement comme souhaité
+                        });
+                    });
             }
         })
 
         let storageRef = firebase.storage().ref();
-        let imageRef = storageRef.child('defaultpp.svg');
+        let imageRef = storageRef.child('users/' + userId);
 
         imageRef.getDownloadURL().then((url) => {
             // Utilisez l'URL de téléchargement ici
             let profile = document.getElementById('profile');
-            profile.style.backgroundImage = "url("+url+")";
+            profile.style.backgroundImage = "url(" + url + ")";
         }).catch((error) => {
             console.error('Erreur lors de la récupération de l\'URL de téléchargement de l\'image :', error);
         });
@@ -180,5 +197,15 @@ document.addEventListener('DOMContentLoaded', function () {
         mail.value = "";
         logPassword.value = "";
         firebase.auth().signOut();
+    });
+
+    const profile = document.getElementById("profile");
+
+    profile.addEventListener('click', function (event) {
+        // Récupérer l'ID de l'utilisateur à partir de l'élément cliqué
+        let userId = firebase.auth().currentUser.uid;
+
+        // Rediriger vers la page du profil de l'utilisateur en passant l'ID dans l'URL
+        window.location.href = 'profil.html?userId=' + userId;
     });
 });

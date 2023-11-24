@@ -9,6 +9,26 @@ $blanc: rgb(202, 202, 202);
 $input : #262626;
 $boutons : #0099ff;
 
+.skeleton-text {
+    width : 80%;
+    height : .5rem;
+    margin-bottom: .25rem;
+    border-radius: .125rem;
+}
+
+.skeleton{
+    animation: skeleton 1s linear infinite alternate;
+}
+
+@keyframes skeleton {
+    0%{
+        background-color: $fond;
+    }
+    100%{
+        background-color: hsl(200,20%,95%);
+    }
+}
+
 html {
     background-color: $fond;
 
@@ -180,6 +200,7 @@ html {
             align-items: center;
             width: 100vw;
             height: 60px;
+            z-index: 10;
 
             a {
                 display: block;
@@ -206,6 +227,7 @@ html {
                 width: 30px;
                 height: 30px;
                 background-size: contain;
+                // background-image: url(../assets/imgs/svg/defaultpp.svg);
             }
 
         }

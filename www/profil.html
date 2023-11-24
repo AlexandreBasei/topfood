@@ -14,6 +14,10 @@
     <link rel="icon" type="image/x-icon" href="./assets/icon/favicon.ico" />
     <link rel="manifest" href="./manifest.json" />
     <link rel="stylesheet" href="./css/profil.css">
+    <script type="module"
+        src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.esm.js"></script>
+    <script nomodule
+        src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase.js"></script>
     <script src="./js/main.js"></script>
     <script src="./connexion.js"></script>
@@ -47,14 +51,45 @@
     </section>
 
     <main>
-        <div id="ppContainer">
-            <img id="pp" src="./assets/imgs/svg/defaultpp.svg">
-            <h2 id="name"></h2>
-            <h3 id="publi"></h3>
-            <h3 id="follow"></h3>
+
+        <section id="editPanel">
+            <button id="back"></button>
+
+            <div id="ppEditContainer">
+                <img alt="Photo de profil">
+                <button>Modifier la photo</button>
+            </div>
+
+            <div id="editInfos">
+                <label for="nom">Nom</label>
+                <input type="text" name="nom" id="editNom">
+                <button id="editName"></button>
+
+                <label for="desc">Bio</label>
+                <input type="text" name="desc" id="editDescr">
+                <button id="editDesc"></button>
+            </div>
+
+            <p></p>
+
+        </section>
+
+        <section id="ppContainer">
+            <div id="pp" class="skeleton"></div>
+            <h2 id="name" class="skeleton skeleton-text"></h2>
+            <h3 id="publi" class="skeleton skeleton-text"></h3>
+            <h3 id="follow" class="skeleton skeleton-text"></h3>
+        </section>
+
+        <p id="desc" class="skeleton skeleton-text"></p>
+
+        <div id="btnContainer">
+            <button id="edit">Modifier le profil</button>
+            <button>Partager le profil</button>
+            <button id="btnLogOut">Se déconnecter</button>
         </div>
 
-        <p id="desc"></p>
+        <button id="btnFollow">Suivre</button>
 
 
     </main>
@@ -62,7 +97,7 @@
         <a href="index.html" id="home"></a>
         <a href="" id="search"></a>
         <a href="" id="add"></a>
-        <a href="./profil.html" id="profile"></a>
+        <button id="profile" class="skeleton"></button>
     </nav>
 </body>
 
