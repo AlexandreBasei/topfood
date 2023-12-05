@@ -69,23 +69,31 @@ firebase.auth().onAuthStateChanged((user) => {
                     posts: 0,
                     followers: 0,
                 })
-                let storageRef = firebase.storage().ref().child('users/' + userId);
+                let storageRef = firebase.storage().ref();
+                const originalPath = 'defaultpp.svg';
 
-                let uploadTask = storageRef.putString('data:image/jpg;base64,./assets/imgs/svg/defaultpp.svg', 'data_url');
+                // Assume that 'duplicatePath' is the desired path for the duplicated image
+                const duplicatePath = 'users/' + userId;
 
-                uploadTask.on('state_changed',
-                    (snapshot) => {
-                        // Suivi de la progression du téléchargement ici (optionnel)
-                    },
-                    (error) => {
-                        // Gestion des erreurs de téléchargement ici
-                    },
-                    () => {
-                        // Le téléchargement est terminé avec succès
-                        // Vous pouvez obtenir l'URL de téléchargement ici
-                        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-                            // Utilisez l'URL de téléchargement comme souhaité
-                        });
+                // Reference to the original image
+                const originalRef = firebase.storage().ref().child(originalPath);
+                const duplicateRef = firebase.storage().ref().child(duplicatePath);
+
+                originalRef
+                    .getDownloadURL()
+                    .then(originalDownloadURL => {
+                        return fetch(originalDownloadURL);
+                    })
+                    .then(response => response.blob())
+                    .then(blob => {
+                        // Upload the blob to the duplicate path
+                        return duplicateRef.put(blob);
+                    })
+                    .then(snapshot => {
+                        console.log('Image duplicated successfully!');
+                    })
+                    .catch(error => {
+                        console.error('Error duplicating image:', error);
                     });
             }
         })
