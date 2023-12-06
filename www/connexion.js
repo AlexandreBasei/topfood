@@ -68,46 +68,37 @@ firebase.auth().onAuthStateChanged((user) => {
                     desc: 'Bienvenue sur mon profil !',
                     posts: 0,
                     followers: 0,
+                    defaultpp: 1,
                 })
-                let storageRef = firebase.storage().ref();
-                const originalPath = 'defaultpp.svg';
-
-                // Assume that 'duplicatePath' is the desired path for the duplicated image
-                const duplicatePath = 'users/' + userId;
-
-                // Reference to the original image
-                const originalRef = firebase.storage().ref().child(originalPath);
-                const duplicateRef = firebase.storage().ref().child(duplicatePath);
-
-                originalRef
-                    .getDownloadURL()
-                    .then(originalDownloadURL => {
-                        return fetch(originalDownloadURL);
-                    })
-                    .then(response => response.blob())
-                    .then(blob => {
-                        // Upload the blob to the duplicate path
-                        return duplicateRef.put(blob);
-                    })
-                    .then(snapshot => {
-                        console.log('Image duplicated successfully!');
-                    })
-                    .catch(error => {
-                        console.error('Error duplicating image:', error);
-                    });
             }
         })
 
         let storageRef = firebase.storage().ref();
         let imageRef = storageRef.child('users/' + userId);
+        let defaultImgRef = storageRef.child('defaultpp.svg');
 
-        imageRef.getDownloadURL().then((url) => {
-            // Utilisez l'URL de téléchargement ici
-            let profile = document.getElementById('profile');
-            profile.style.backgroundImage = "url(" + url + ")";
-        }).catch((error) => {
-            console.error('Erreur lors de la récupération de l\'URL de téléchargement de l\'image :', error);
-        });
+        ref.on('value', (snapshot) => {
+            let data = snapshot.val();
+            
+            if (data.defaultpp == 1) {
+                defaultImgRef.getDownloadURL().then((url) => {
+                    // Utilisez l'URL de téléchargement ici
+                    let profile = document.getElementById('profile');
+                    profile.style.backgroundImage = "url(" + url + ")";
+                }).catch((error) => {
+                    console.error('Erreur lors de la récupération de l\'URL de téléchargement de l\'image :', error);
+                });
+            }
+            else{
+                imageRef.getDownloadURL().then((url) => {
+                    // Utilisez l'URL de téléchargement ici
+                    let profile = document.getElementById('profile');
+                    profile.style.backgroundImage = "url(" + url + ")";
+                }).catch((error) => {
+                    console.error('Erreur lors de la récupération de l\'URL de téléchargement de l\'image :', error);
+                });
+            }
+        })
 
         document.getElementById("log").style.display = "none";
     } else {

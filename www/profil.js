@@ -20,6 +20,8 @@ const takePicture = async () => {
         resultType: npxPlugins.CameraResultType.Base64
     });
 
+    let ref = firebase.database().ref("users/" + userId);
+
     let currentId = firebase.auth().currentUser.uid;
 
     let storageRef = firebase.storage().ref().child('users/' + currentId);
@@ -37,6 +39,19 @@ const takePicture = async () => {
         },
         () => {
             // Le téléchargement est terminé avec succès
+            ref.once("value", (snapshot) => {
+                ref.update({
+                    defaultpp: 0
+                })
+            })
+            let imageRef = storageRef.child('users/' + userId);
+            imageRef.getDownloadURL().then((url) => {
+                // Utilisez l'URL de téléchargement ici
+                pp.style.backgroundImage = "url(" + url + ")";
+            }).catch((error) => {
+                console.error('Erreur lors de la récupération de l\'URL de téléchargement de l\'image :', error);
+            });
+
             // Vous pouvez obtenir l'URL de téléchargement ici
             uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
                 // Utilisez l'URL de téléchargement comme souhaité
@@ -46,12 +61,12 @@ const takePicture = async () => {
 };
 
 const getUserData = (uid) => {
-    let ref = firebase.database().ref("users/" + uid);
     const pp = document.getElementById("pp");
     const name = document.getElementById("name");
     const publi = document.getElementById("publi");
     const follow = document.getElementById("follow");
     const descr = document.getElementById("desc");
+    const ref = firebase.database().ref("users/" + uid);
 
     ref.on('value', (snapshot) => {
         let data = snapshot.val();
@@ -63,13 +78,28 @@ const getUserData = (uid) => {
 
             let storageRef = firebase.storage().ref();
             let imageRef = storageRef.child('users/' + userId);
+            let defaultImgRef = storageRef.child('defaultpp.svg');
 
-            imageRef.getDownloadURL().then((url) => {
-                // Utilisez l'URL de téléchargement ici
-                pp.style.backgroundImage = "url(" + url + ")";
-            }).catch((error) => {
-                console.error('Erreur lors de la récupération de l\'URL de téléchargement de l\'image :', error);
-            });
+            ref.on('value', (snapshot) => {
+                let data = snapshot.val();
+                
+                if (data.defaultpp == 1) {
+                    defaultImgRef.getDownloadURL().then((url) => {
+                        // Utilisez l'URL de téléchargement ici
+                        pp.style.backgroundImage = "url(" + url + ")";
+                    }).catch((error) => {
+                        console.error('Erreur lors de la récupération de l\'URL de téléchargement de l\'image :', error);
+                    });
+                }
+                else{
+                    imageRef.getDownloadURL().then((url) => {
+                        // Utilisez l'URL de téléchargement ici
+                        pp.style.backgroundImage = "url(" + url + ")";
+                    }).catch((error) => {
+                        console.error('Erreur lors de la récupération de l\'URL de téléchargement de l\'image :', error);
+                    });
+                }
+            })
 
             const elements = document.getElementById('ppContainer').querySelectorAll(".skeleton");
 
@@ -97,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnEditNom = document.getElementById('editName');
     const btnEditDesc = document.getElementById('editDesc');
     const editPanel = document.getElementById('editPanel');
+    const ref = firebase.database().ref("users/" + getProfileUid('userId'));
 
     firebase.auth().onAuthStateChanged((user) => {
         let currentUserId = user.uid;
@@ -142,7 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnEditNom.addEventListener('click', () => {
         let newName = editNom.value;
-        let ref = firebase.database().ref('users/' + userId);
         ref.update({
             name: newName
         }).then(() => {
@@ -158,7 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnEditDesc.addEventListener('click', () => {
         let newDesc = editDescr.value;
-        let ref = firebase.database().ref('users/' + userId);
         ref.update({
             desc: newDesc
         }).then(() => {
@@ -174,6 +203,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelector('#ppEditContainer button').addEventListener('click', () => {
         takePicture();
-
     })
 })
