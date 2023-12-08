@@ -24,7 +24,7 @@ const takePicture = async () => {
 
     let currentId = firebase.auth().currentUser.uid;
 
-    let storageRef = firebase.storage().ref().child('users/' + currentId);
+    let storageRef = firebase.storage().ref().child('users/' + currentId + '/' + currentId);
 
     let imageb64 = image.base64String;
 
@@ -44,7 +44,7 @@ const takePicture = async () => {
                     defaultpp: 0
                 })
             })
-            let imageRef = storageRef.child('users/' + userId);
+            let imageRef = storageRef.child('users/' + userId + '/' + userId);
             imageRef.getDownloadURL().then((url) => {
                 // Utilisez l'URL de téléchargement ici
                 pp.style.backgroundImage = "url(" + url + ")";
@@ -55,13 +55,13 @@ const takePicture = async () => {
             // Vous pouvez obtenir l'URL de téléchargement ici
             uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
                 // Utilisez l'URL de téléchargement comme souhaité
-                console.log('URL de téléchargement :', downloadURL);
             });
         });
 };
 
 const getUserData = (uid) => {
     const pp = document.getElementById("pp");
+    const ppEdit = document.getElementById("ppEdit");
     const name = document.getElementById("name");
     const publi = document.getElementById("publi");
     const follow = document.getElementById("follow");
@@ -77,7 +77,7 @@ const getUserData = (uid) => {
             let desc = data.desc;
 
             let storageRef = firebase.storage().ref();
-            let imageRef = storageRef.child('users/' + userId);
+            let imageRef = storageRef.child('users/' + userId + '/' + userId);
             let defaultImgRef = storageRef.child('defaultpp.svg');
 
             ref.on('value', (snapshot) => {
@@ -87,6 +87,8 @@ const getUserData = (uid) => {
                     defaultImgRef.getDownloadURL().then((url) => {
                         // Utilisez l'URL de téléchargement ici
                         pp.style.backgroundImage = "url(" + url + ")";
+                        ppEdit.style.backgroundImage = "url(" + url + ")";
+
                     }).catch((error) => {
                         console.error('Erreur lors de la récupération de l\'URL de téléchargement de l\'image :', error);
                     });
@@ -95,6 +97,7 @@ const getUserData = (uid) => {
                     imageRef.getDownloadURL().then((url) => {
                         // Utilisez l'URL de téléchargement ici
                         pp.style.backgroundImage = "url(" + url + ")";
+                        ppEdit.style.backgroundImage = "url(" + url + ")";
                     }).catch((error) => {
                         console.error('Erreur lors de la récupération de l\'URL de téléchargement de l\'image :', error);
                     });
@@ -204,4 +207,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#ppEditContainer button').addEventListener('click', () => {
         takePicture();
     })
+
+    const login = document.getElementById("login");
+    const password = document.getElementById("password");
+    const mail = document.getElementById("mail");
+    const logPassword = document.getElementById("logPassword");
+    const pConfirm = document.querySelector('#connexion p');
+
+    document.getElementById("btnLogOut").addEventListener('click', () => {
+        document.querySelector("#connexion p").textContent = "";
+        login.value = "";
+        password.value = "";
+        mail.value = "";
+        logPassword.value = "";
+        pConfirm.style.display = "none";
+        firebase.auth().signOut();
+    });
 })

@@ -131,6 +131,9 @@ html body #log section input {
   border-radius: 10px;
   padding: 2vh 0 2vh 10px;
 }
+html body #log section input:focus {
+  outline: none;
+}
 html body #log #logSub {
   pointer-events: none;
 }
@@ -197,4 +200,11 @@ html body nav #profile {
   width: 30px;
   height: 30px;
   background-size: contain;
+}
+html body input:-webkit-autofill,
+html body input:-webkit-autofill:hover,
+html body input:-webkit-autofill:focus,
+html body input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #262626 inset !important;
+  -webkit-text-fill-color: rgb(202, 202, 202) !important;
 }/*# sourceMappingURL=main.css.map */

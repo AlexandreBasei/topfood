@@ -149,6 +149,9 @@ html {
                     border-radius: 10px;
                     padding: 2vh 0 2vh 10px;
                 }
+                input:focus{
+                    outline: none;
+                }
             }
 
             #logSub{
@@ -230,6 +233,14 @@ html {
                 // background-image: url(../assets/imgs/svg/defaultpp.svg);
             }
 
+        }
+
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px $input inset !important;
+            -webkit-text-fill-color: $blanc !important;
         }
     }
 }

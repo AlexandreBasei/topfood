@@ -74,7 +74,7 @@ firebase.auth().onAuthStateChanged((user) => {
         })
 
         let storageRef = firebase.storage().ref();
-        let imageRef = storageRef.child('users/' + userId);
+        let imageRef = storageRef.child('users/' + userId + '/' + userId);
         let defaultImgRef = storageRef.child('defaultpp.svg');
 
         ref.on('value', (snapshot) => {
@@ -188,15 +188,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     })
-
-    document.getElementById("btnLogOut").addEventListener('click', () => {
-        document.querySelector("#connexion p").textContent = "";
-        login.value = "";
-        password.value = "";
-        mail.value = "";
-        logPassword.value = "";
-        firebase.auth().signOut();
-    });
 
     const profile = document.getElementById("profile");
 
