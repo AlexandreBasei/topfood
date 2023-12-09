@@ -48,14 +48,7 @@ const takePicture = async () => {
             imageRef.getDownloadURL().then((url) => {
                 // Utilisez l'URL de téléchargement ici
                 pp.style.backgroundImage = "url(" + url + ")";
-            }).catch((error) => {
-                console.error('Erreur lors de la récupération de l\'URL de téléchargement de l\'image :', error);
-            });
-
-            // Vous pouvez obtenir l'URL de téléchargement ici
-            uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-                // Utilisez l'URL de téléchargement comme souhaité
-            });
+            })
         });
 };
 
@@ -72,7 +65,7 @@ const getUserData = (uid) => {
         let data = snapshot.val();
         if (data) {
             let nom = data.name;
-            let public = data.posts;
+            let public = data.nbPosts;
             let fol = data.followers;
             let desc = data.desc;
 
@@ -82,7 +75,7 @@ const getUserData = (uid) => {
 
             ref.on('value', (snapshot) => {
                 let data = snapshot.val();
-                
+
                 if (data.defaultpp == 1) {
                     defaultImgRef.getDownloadURL().then((url) => {
                         // Utilisez l'URL de téléchargement ici
@@ -93,7 +86,7 @@ const getUserData = (uid) => {
                         console.error('Erreur lors de la récupération de l\'URL de téléchargement de l\'image :', error);
                     });
                 }
-                else{
+                else {
                     imageRef.getDownloadURL().then((url) => {
                         // Utilisez l'URL de téléchargement ici
                         pp.style.backgroundImage = "url(" + url + ")";
@@ -122,6 +115,40 @@ const getUserData = (uid) => {
     });
 }
 
+const getPosts = () => {
+    const container = document.getElementById("postsContainer");
+
+    let ref = firebase.database().ref("users/" + userId + '/posts/');
+
+    ref.once('value')
+        .then((snapshot) => {
+            if (snapshot.val() === null) {
+                let noPost = document.createElement('p');
+                noPost.classList.add('noPost');
+                noPost.textContent = "Aucun post pour le moment...";
+                container.appendChild(noPost);
+            } 
+            else {
+                snapshot.forEach((post) => {
+                    const id = post.key;
+                    const data = post.val();
+
+                    let postContainer = document.createElement('div');
+                    postContainer.classList.add('post');
+                    container.appendChild(postContainer);
+
+                    let postContent = `
+                    <h3>${data.restaurant}</h3>
+                    `;
+
+                    postContainer.innerHTML = postContent;
+                });
+            }
+        })
+        .catch((error) => {
+            console.error('Erreur lors de la lecture du dossier :', error);
+        });
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -144,6 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
             editPanel.style.display = "none";
             document.getElementById('btnFollow').style.display = 'block';
         }
+
+        getPosts();
     })
 
     document.getElementById('edit').addEventListener("click", () => {

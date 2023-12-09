@@ -66,7 +66,7 @@ firebase.auth().onAuthStateChanged((user) => {
                 ref.set({
                     name: 'Utilisateur',
                     desc: 'Bienvenue sur mon profil !',
-                    posts: 0,
+                    nbPosts: 0,
                     followers: 0,
                     defaultpp: 1,
                 })

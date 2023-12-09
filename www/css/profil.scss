@@ -223,6 +223,25 @@ html {
                 border: 2px solid $blanc;
                 color: $blanc;
             }
+
+            #postsContainer{
+                display: flex;
+                flex-flow: wrap row;
+                justify-content: center;
+                align-items: center;
+                gap: 2vh;
+
+                .noPost{
+                    color: $blanc;
+                    margin-top: 10vh;
+                }
+
+                .post{
+                    width: 100vw;
+                    background-color: $input;
+                    margin-top: 5vh;
+                }
+            }
         }
     }
 }

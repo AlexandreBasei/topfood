@@ -191,4 +191,20 @@ html body main #btnFollow.followed {
   background-color: transparent;
   border: 2px solid rgb(202, 202, 202);
   color: rgb(202, 202, 202);
+}
+html body main #postsContainer {
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+  align-items: center;
+  gap: 2vh;
+}
+html body main #postsContainer .noPost {
+  color: rgb(202, 202, 202);
+  margin-top: 10vh;
+}
+html body main #postsContainer .post {
+  width: 100vw;
+  background-color: #262626;
+  margin-top: 5vh;
 }/*# sourceMappingURL=profil.css.map */
