@@ -1,6 +1,6 @@
 {
   "appId": "com.example.app",
-  "appName": "topfood",
+  "appName": "TopFood",
   "bundledWebRuntime": false,
   "webDir": "www",
   "plugins": {
