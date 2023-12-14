@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rechercher</title>
+    <meta name="viewport"
+        content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+
+    <link rel="icon" type="image/x-icon" href="./assets/icon/favicon.ico" />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="stylesheet" href="./css/search.css">
+    <script type="module"
+        src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.esm.js"></script>
+    <script nomodule
+        src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./config.js"></script>
+    <script src="./connexion.js"></script>
+    <script src="./search.js"></script>
+</head>
+
+<body>
+
+    <section id="log">
+        <div id="logchoice">
+            <button class="normal" id="btnlog">Connexion</button>
+            <button id="btnsign">Inscription</button>
+        </div>
+
+        <section id="connexion">
+            <form>
+                <input id="login" type="email" placeholder="Email">
+                <input id="password" type="password" minlength="6" placeholder="Mot de passe">
+                <input class="logSubmit" onclick="logIn(event)" id="logSub" type="submit" value="Se connecter">
+            </form>
+            <p></p>
+        </section>
+
+        <section id="inscription" class="inscription">
+            <form>
+                <input id="mail" type="email" placeholder="Email">
+                <input id="logPassword" type="password" minlength="6" placeholder="Mot de passe">
+                <input class="logSubmit" onclick="signIn(event)" id="signSub" type="submit" value="S'inscrire">
+            </form>
+            <p></p>
+        </section>
+    </section>
+
+    <main>
+
+        <div id="searchIcon"><input type="text" id="searchInput" placeholder="Rechercher un utilisateur"></div>
+
+        <ul id="searchResults"></ul>
+
+    </main>
+    <nav>
+        <a href="./index.html" id="home"></a>
+        <a href="./search.html" id="search"></a>
+        <a href="./add.html" id="add"></a>
+        <button id="profile" class="skeleton"></button>
+    </nav>
+</body>
+
+</html>

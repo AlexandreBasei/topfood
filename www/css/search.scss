@@ -1,0 +1,105 @@
+@import url(./main.css);
+
+$fond: rgb(16, 16, 16);
+$blanc: rgb(202, 202, 202);
+$input: #262626;
+$boutons: #0099ff;
+
+html {
+    font-family: Arial, sans-serif;
+    color: $blanc;
+}
+
+main {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: center;
+    align-items: center;
+
+    input {
+        color: $blanc;
+        width: 70vw;
+        background-color: $input;
+        border: none;
+        border-radius: 10px;
+        padding: 20px 10px 20px 40px;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    #searchIcon{
+        position: relative;
+        margin-top: 5vh;
+    }
+
+    #searchIcon::after {
+        content: '';
+        background-image: url('../assets/imgs/svg/search.svg');
+        width: 20px;
+        height: 20px;
+        background-size: contain;
+        display: block;
+        position: absolute;
+        top: 28%;
+        left: 2.8%;
+        background-repeat: no-repeat;
+    }
+
+    ul {
+        width: 100vw;
+        display: flex;
+        flex-flow: wrap row;
+        justify-content: center;
+        align-items: center;
+        margin: 5vh 0 0 0;
+        padding: 0;
+        gap: 20px;
+
+        li {
+            margin: 0;
+            list-style: none;
+            width: 90vw;
+            display: flex;
+            flex-flow: wrap row;
+            justify-content: start;
+            align-items: center;
+            gap: 20px;
+            padding-left: 10vw;
+        }
+
+        img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        a {
+            font-size: 1.1rem;
+            color: $blanc;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            font-size: 1.1rem;
+            font-weight: bold;
+            background-color: $boutons;
+            transition: background-color .2s ease;
+        }
+
+        .desac{
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .followed{
+            background-color: transparent;
+            border: 2px solid $blanc;
+            color: $blanc;
+        }
+    }
+}

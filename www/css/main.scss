@@ -33,6 +33,7 @@ html {
     background-color: $fond;
 
     body{
+        padding-bottom: 10vh;
 
         #log {
             color: $blanc;
@@ -42,7 +43,7 @@ html {
             z-index: 100000;
             display: none;
             top: 0;
-            position: absolute;
+            position: fixed;
             overflow-y: hidden;
             overflow-x: hidden;
             flex-flow: wrap;
@@ -229,8 +230,8 @@ html {
                 border: none;
                 width: 30px;
                 height: 30px;
-                background-size: contain;
-                // background-image: url(../assets/imgs/svg/defaultpp.svg);
+                background-size: cover;
+                background-repeat: no-repeat;
             }
 
         }

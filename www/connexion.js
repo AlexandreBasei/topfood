@@ -1,13 +1,4 @@
-const config = {
-    apiKey: "AIzaSyC3FPfmxrdekpCizVIMW9KCRqC0NiyVyEs",
-    authDomain: "topfood-391d9.firebaseapp.com",
-    databaseURL: "https://topfood-391d9-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "topfood-391d9",
-    storageBucket: "topfood-391d9.appspot.com",
-    messagingSenderId: "850223433184",
-    appId: "1:850223433184:web:c1ef8c3a4bfeecd1251785",
-    measurementId: "G-N1NFJT7FV2"
-};
+const npxPlugins = Plugins.Capacitor();
 
 const logIn = (event) => {
     event.preventDefault();
@@ -51,8 +42,36 @@ const signIn = (event) => {
         })
 }
 
+const requestPermission = async () => {
+    try {
+        // Demander la permission pour les notifications
+        const permission = await Notification.requestPermission();
+
+        if (permission === 'granted') {
+            // Obtenir le jeton d'inscription (token) depuis FCM
+            const currentToken = await messaging.getToken({ vapidKey: publicKey });
+
+            if (currentToken) {
+                // Envoyer le jeton à votre serveur et mettre à jour l'interface utilisateur si nécessaire
+                console.log(currentToken);
+                return currentToken;
+
+            } else {
+                // Afficher l'interface utilisateur de demande d'autorisation
+                console.log('Pas de jeton d\'inscription disponible. Demander la permission pour en générer un.');
+            }
+        }
+    } catch (error) {
+        console.error('Une erreur s\'est produite lors de la demande de permission :', error);
+    }
+};
+
 firebase.initializeApp(config);
-let database = firebase.database();
+const messaging = firebase.messaging();
+
+const database = firebase.database();
+
+let token;
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -69,6 +88,7 @@ firebase.auth().onAuthStateChanged((user) => {
                     nbPosts: 0,
                     followers: 0,
                     defaultpp: 1,
+                    followed: "",
                 })
             }
         })
@@ -79,7 +99,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
         ref.on('value', (snapshot) => {
             let data = snapshot.val();
-            
+
             if (data.defaultpp == 1) {
                 defaultImgRef.getDownloadURL().then((url) => {
                     // Utilisez l'URL de téléchargement ici
@@ -89,7 +109,7 @@ firebase.auth().onAuthStateChanged((user) => {
                     console.error('Erreur lors de la récupération de l\'URL de téléchargement de l\'image :', error);
                 });
             }
-            else{
+            else {
                 imageRef.getDownloadURL().then((url) => {
                     // Utilisez l'URL de téléchargement ici
                     let profile = document.getElementById('profile');
@@ -99,7 +119,7 @@ firebase.auth().onAuthStateChanged((user) => {
                 });
             }
         })
-
+        token = requestPermission();
         document.getElementById("log").style.display = "none";
     } else {
         // Aucun utilisateur n'est connecté
@@ -196,6 +216,6 @@ document.addEventListener('DOMContentLoaded', function () {
         let userId = firebase.auth().currentUser.uid;
 
         // Rediriger vers la page du profil de l'utilisateur en passant l'ID dans l'URL
-        window.location.href = 'profil.html?userId=' + userId;
+        window.location.href = './profil.html?userId=' + userId;
     });
 });

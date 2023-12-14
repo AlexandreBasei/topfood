@@ -1,12 +1,27 @@
 @import url(./main.css);
 
-$fond : rgb(16, 16, 16);
+@font-face {
+    font-family: "TopFood"; /* Remplacez par le nom que vous souhaitez donner à votre police */
+    src:
+        url("../assets/fonts/zh-cn.woff2") format("woff2"),
+        /* Format WOFF2 */ url("../assets/fonts/one_slice-webfont.woff") format("woff"); /* Format WOFF */
+    /* Autres propriétés optionnelles telles que font-weight, font-style, etc. */
+}
+
+@font-face {
+    font-family: "TopFood2"; /* Remplacez par le nom que vous souhaitez donner à votre police */
+    src:
+        url("../assets/fonts/hyliaserifbeta-regular-webfont.woff2") format("woff2"),
+        /* Format WOFF2 */ url("../assets/fonts/hyliaserifbeta-regular-webfont.woff") format("woff"); /* Format WOFF */
+    /* Autres propriétés optionnelles telles que font-weight, font-style, etc. */
+}
+
+$fond: rgb(16, 16, 16);
 $blanc: rgb(202, 202, 202);
-$input : #262626;
-$boutons : #0099ff;
+$input: #262626;
+$boutons: #0099ff;
 
 html {
-
     body {
         header {
             margin-top: 0;
@@ -16,47 +31,54 @@ html {
             flex-flow: wrap row;
             align-items: center;
             justify-content: center;
-            background-image: linear-gradient(to bottom right, #FEC163, #DE4313);
+            background-color: #202020;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
 
             h1 {
-                font-size: 2rem;
+                font-size: 1.5rem;
                 color: rgb(230, 229, 229);
                 text-align: center;
                 position: relative;
-                // height: 10px;
                 width: fit-content;
                 margin: 0 0 0 5vw;
-                text-transform: uppercase;
-                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                font-family: "TopFood";
+                letter-spacing: 2px;
+                background-image: linear-gradient(to bottom right, #fec163, #de4313);
+                color: transparent;
+                background-clip: text;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
             }
 
             h1::before {
-                content: '';
+                content: "";
                 background-image: url(../assets/imgs/png/logo.png);
                 position: absolute;
                 display: block;
-                background-size: 40px 40px;
+                background-size: 35px 35px;
                 left: -50px;
-                width: 40px;
-                height: 40px;
+                top: -15%;
+                width: 35px;
+                height: 35px;
             }
 
-            button{
+            button {
                 position: absolute;
                 left: 88vw;
                 border: none;
                 background-color: transparent;
                 background-image: url(../assets/imgs/svg/bell.svg);
                 background-repeat: no-repeat;
-                background-size: contain;                width: 40px;
+                background-size: contain;
+                width: 40px;
                 height: 25px;
                 width: 25px;
                 user-select: none;
             }
         }
 
-        main{
-            button{
+        main {
+            button {
                 margin-top: 10vh;
                 background-color: red;
                 padding: 20px;

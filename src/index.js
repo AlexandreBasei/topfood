@@ -1,6 +1,7 @@
 import '@capacitor/core';
 import { Camera, CameraResultType } from '@capacitor/camera';
 import { Filesystem } from '@capacitor/filesystem';
+import { PushNotifications } from '@capacitor/push-notifications';
 
 
 export function Capacitor() {
@@ -8,5 +9,6 @@ export function Capacitor() {
         "Camera" : Camera,
         "CameraResultType" : CameraResultType,
         "Filesystem" : Filesystem,
+        "PushNotifications" : PushNotifications,
     }
 }

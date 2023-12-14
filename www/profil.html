@@ -20,6 +20,7 @@
         src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase.js"></script>
     <script src="./js/main.js"></script>
+    <script src="./config.js"></script>
     <script src="./connexion.js"></script>
     <script src="./profil.js"></script>
 </head>
@@ -56,31 +57,36 @@
             <button id="back"></button>
 
             <div id="ppEditContainer">
-                <div id="ppEdit"></div>
+                <img id="ppEdit">
                 <button>Modifier la photo</button>
             </div>
 
             <div id="editInfos">
                 <label for="nom">Nom</label>
                 <input type="text" name="nom" id="editNom">
-                <button id="editName"></button>
 
                 <label for="desc">Bio</label>
                 <input type="text" name="desc" id="editDescr">
-                <button id="editDesc"></button>
             </div>
-            <p></p>
+            <button id="enregistrer">Enregistrer</button>
 
         </section>
 
         <section id="ppContainer">
-            <div id="pp" class="skeleton"></div>
-            <h2 id="name" class="skeleton skeleton-text"></h2>
+            <div class="PPName">
+                <img id="pp" class="skeleton">
+                <h2 id="name" class="skeleton skeleton-text"></h2>
+                <button id="btnFollow">Suivre</button>
+            </div>
             <h3 id="publi" class="skeleton skeleton-text"></h3>
             <h3 id="follow" class="skeleton skeleton-text"></h3>
         </section>
 
         <p id="desc" class="skeleton skeleton-text"></p>
+
+        <section id="postsContainer">
+            <div id="skPost" class="skeleton"></div>
+        </section>
 
         <div id="btnContainer">
             <button id="edit">Modifier le profil</button>
@@ -88,15 +94,11 @@
             <button id="btnLogOut">Se déconnecter</button>
         </div>
 
-        <button id="btnFollow">Suivre</button>
-
-        <section id="postsContainer"></section>
-
     </main>
     <nav>
-        <a href="index.html" id="home"></a>
-        <a href="" id="search"></a>
-        <a href="add.html" id="add"></a>
+        <a href="./index.html" id="home"></a>
+        <a href="./search.html" id="search"></a>
+        <a href="./add.html" id="add"></a>
         <button id="profile" class="skeleton"></button>
     </nav>
 </body>

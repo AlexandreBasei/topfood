@@ -26,6 +26,9 @@ html, body {
 html {
   background-color: rgb(16, 16, 16);
 }
+html body {
+  padding-bottom: 10vh;
+}
 html body #log {
   color: rgb(202, 202, 202);
   width: 100vw;
@@ -34,7 +37,7 @@ html body #log {
   z-index: 100000;
   display: none;
   top: 0;
-  position: absolute;
+  position: fixed;
   overflow-y: hidden;
   overflow-x: hidden;
   flex-flow: wrap;
@@ -199,7 +202,8 @@ html body nav #profile {
   border: none;
   width: 30px;
   height: 30px;
-  background-size: contain;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 html body input:-webkit-autofill,
 html body input:-webkit-autofill:hover,

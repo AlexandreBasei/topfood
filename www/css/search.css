@@ -1,0 +1,89 @@
+@import url(./main.css);
+html {
+  font-family: Arial, sans-serif;
+  color: rgb(202, 202, 202);
+}
+
+main {
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+  align-items: center;
+}
+main input {
+  color: rgb(202, 202, 202);
+  width: 70vw;
+  background-color: #262626;
+  border: none;
+  border-radius: 10px;
+  padding: 20px 10px 20px 40px;
+}
+main input:focus {
+  outline: none;
+}
+main #searchIcon {
+  position: relative;
+  margin-top: 5vh;
+}
+main #searchIcon::after {
+  content: "";
+  background-image: url("../assets/imgs/svg/search.svg");
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  display: block;
+  position: absolute;
+  top: 28%;
+  left: 2.8%;
+  background-repeat: no-repeat;
+}
+main ul {
+  width: 100vw;
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+  align-items: center;
+  margin: 5vh 0 0 0;
+  padding: 0;
+  gap: 20px;
+}
+main ul li {
+  margin: 0;
+  list-style: none;
+  width: 90vw;
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+  padding-left: 10vw;
+}
+main ul img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+main ul a {
+  font-size: 1.1rem;
+  color: rgb(202, 202, 202);
+}
+main ul button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: #0099ff;
+  transition: background-color 0.2s ease;
+}
+main ul .desac {
+  opacity: 0;
+  pointer-events: none;
+}
+main ul .followed {
+  background-color: transparent;
+  border: 2px solid rgb(202, 202, 202);
+  color: rgb(202, 202, 202);
+}/*# sourceMappingURL=search.css.map */
