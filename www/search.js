@@ -57,18 +57,24 @@ const handleSearch = () => {
                     userRef.once('value', async (snapshot) => {
 
                         let data = snapshot.val();
-                        let followed = data.followed.split(',');
+                        let followed = data.followed;
+
+                        if (typeof followed === 'string') {
+                            followed = followed.split(',');
+                        } else {
+                            followed = []; // Si ce n'est pas une chaîne, initialisez-la comme un tableau vide
+                        }
 
                         currentRef.once("value", async (snapshot2) => {
                             let currentData = snapshot2.val();
 
-                            if(followed.includes(userId) == false && currentData.defaultpp == 1 && firebase.auth().currentUser.uid != userId) {
+                            if (followed.includes(userId) == false && currentData.defaultpp == 1 && firebase.auth().currentUser.uid != userId) {
                                 listItem.innerHTML = `
                                 <a href='./profil.html?userId=${userId}'><img src="${await getDefaultImg()}"></a>
                                 <a href='./profil.html?userId=${userId}'>${userData.name}</a>
                                 <button id="${userId}" onclick="follow(${userId})">Suivre</button>
                               `;
-                              searchResults.appendChild(listItem);
+                                searchResults.appendChild(listItem);
                             }
                             else if (followed.includes(userId) && currentData.defaultpp == 1 && firebase.auth().currentUser.uid != userId) {
                                 listItem.innerHTML = `
@@ -76,14 +82,15 @@ const handleSearch = () => {
                                 <a href='./profil.html?userId=${userId}'>${userData.name}</a>
                                 <button id="${userId}" class='followed' onclick="follow(${userId})">Suivi(e)</button>
                               `;
-                              searchResults.appendChild(listItem);                            }
+                                searchResults.appendChild(listItem);
+                            }
                             else if (followed.includes(userId) && currentData.defaultpp == 0 && firebase.auth().currentUser.uid != userId) {
                                 listItem.innerHTML = `
                                 <a href='./profil.html?userId=${userId}'><img src="${await getImg(userId)}"></a>
                                 <a href='./profil.html?userId=${userId}'>${userData.name}</a>
                                 <button id="${userId}" class='followed' onclick="follow(${userId})">Suivi(e)</button>
                               `;
-                              searchResults.appendChild(listItem);
+                                searchResults.appendChild(listItem);
                             }
                             else if (followed.includes(userId) == false && currentData.defaultpp == 0 && firebase.auth().currentUser.uid != userId) {
                                 listItem.innerHTML = `
@@ -91,7 +98,7 @@ const handleSearch = () => {
                                 <a href='./profil.html?userId=${userId}'>${userData.name}</a>
                                 <button id="${userId}" onclick="follow(${userId})">Suivre</button>
                               `;
-                              searchResults.appendChild(listItem);
+                                searchResults.appendChild(listItem);
                             }
                         })
                     })
@@ -142,7 +149,7 @@ const follow = (uid) => {
 
                 usersRef.update({ followed: currentFollows });
 
-                sendNotification(token);
+                //  
 
                 document.getElementById(id).classList.add("followed");
                 document.getElementById(id).innerText = "Suivi(e)";
@@ -151,56 +158,8 @@ const follow = (uid) => {
     });
 }
 
-const sendNotification = async (token) => {
-    try {
-        const user = firebase.auth().currentUser;
-        const userName = user ? user.displayName : 'Utilisateur inconnu';
-
-        // Envoyer une notification avec Capacitor
-
-        await npxPlugins.PushNotifications.register();
-        await npxPlugins.PushNotifications.createChannel({
-            description: 'Notification Channel',
-            id: 'channel1',
-            importance: 5,
-            name: 'Channel 1',
-            sound: 'notification.mp3',
-            visibility: 1,
-        });
-
-        await npxPlugins.PushNotifications.addListener('registration', (token) => {
-            console.log('Push registration success, token:', token.value);
-        });
-
-        await npxPlugins.PushNotifications.addListener('registrationError', (error) => {
-            console.error('Error during push registration:', error);
-        });
-
-        await npxPlugins.PushNotifications.addListener('pushNotificationReceived', (notification) => {
-            console.log('Push received:', notification);
-        });
-
-        await npxPlugins.PushNotifications.addListener('pushNotificationActionPerformed', (notification) => {
-            console.log('Push action performed:', notification);
-        });
-
-        await npxPlugins.PushNotifications.subscribe({ topic: 'channel1' });
-
-        await npxPlugins.PushNotifications.sendNotification({
-            title: 'TopFood',
-            body: `${userName} vous a suivi`,
-            channelId: 'channel1',
-        });
-
-    } catch (error) {
-        console.error('Erreur lors de l\'envoi de la notification :', error);
-    }
-};
-
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
 
     searchInput.addEventListener('input', handleSearch);
-
-    const btnsFollow = document.querySelectorAll('li button');
 })

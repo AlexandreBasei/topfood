@@ -42,44 +42,42 @@ const signIn = (event) => {
         })
 }
 
-const requestPermission = async () => {
-    try {
-        // Demander la permission pour les notifications
-        const permission = await Notification.requestPermission();
+const registerNotifications = async () => {
+    let permStatus = await npxPlugins.PushNotifications.checkPermissions();
 
-        if (permission === 'granted') {
-            // Obtenir le jeton d'inscription (token) depuis FCM
-            const currentToken = await messaging.getToken({ vapidKey: publicKey });
-
-            if (currentToken) {
-                // Envoyer le jeton à votre serveur et mettre à jour l'interface utilisateur si nécessaire
-                console.log(currentToken);
-                return currentToken;
-
-            } else {
-                // Afficher l'interface utilisateur de demande d'autorisation
-                console.log('Pas de jeton d\'inscription disponible. Demander la permission pour en générer un.');
-            }
-        }
-    } catch (error) {
-        console.error('Une erreur s\'est produite lors de la demande de permission :', error);
+    if (permStatus.receive === 'prompt') {
+        permStatus = await npxPlugins.PushNotifications.requestPermissions();
     }
-};
+
+    if (permStatus.receive !== 'granted') {
+        throw new Error('User denied permissions!');
+    }
+
+    await npxPlugins.PushNotifications.register();
+}
+
+registerNotifications();
+
+const getToken = async () => {
+    return new Promise(async (resolve, reject) => {
+        await npxPlugins.PushNotifications.addListener('registration', token => {
+          resolve(token.value);
+        });
+    })
+}
 
 firebase.initializeApp(config);
-const messaging = firebase.messaging();
+// const messaging = firebase.messaging();
 
 const database = firebase.database();
 
-let token;
-
-firebase.auth().onAuthStateChanged((user) => {
+firebase.auth().onAuthStateChanged(async (user) => {
     if (user) {
         // L'utilisateur est connecté
         let userId = user.uid;
         let ref = firebase.database().ref("users/" + userId);
 
-        ref.once('value', (snapshot) => {
+        ref.once('value', async (snapshot) => {
 
             if (snapshot.exists() == false) {
                 ref.set({
@@ -89,8 +87,12 @@ firebase.auth().onAuthStateChanged((user) => {
                     followers: 0,
                     defaultpp: 1,
                     followed: "",
+                    token: await getToken(),
                 })
             }
+            ref.update({
+                token: await getToken()
+            })
         })
 
         let storageRef = firebase.storage().ref();
@@ -119,7 +121,7 @@ firebase.auth().onAuthStateChanged((user) => {
                 });
             }
         })
-        token = requestPermission();
+        // token = requestPermission();
         document.getElementById("log").style.display = "none";
     } else {
         // Aucun utilisateur n'est connecté

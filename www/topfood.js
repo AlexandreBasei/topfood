@@ -1,4 +1,4 @@
-const userId = firebase.auth().currentUser.uid;
+// const userId = firebase.auth().currentUser.uid;
 
 const getFollowed = async () => {
     let ref = firebase.database().ref("users/" + userId + '/followed');
@@ -139,5 +139,5 @@ const getImg = async (id) => {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    getFollowed();
+    // getFollowed();
 });
