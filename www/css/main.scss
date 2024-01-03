@@ -1,3 +1,11 @@
+@font-face {
+    font-family: "TopFood"; /* Remplacez par le nom que vous souhaitez donner à votre police */
+    src:
+        url("../assets/fonts/zh-cn.woff2") format("woff2"),
+        /* Format WOFF2 */ url("../assets/fonts/one_slice-webfont.woff") format("woff"); /* Format WOFF */
+    /* Autres propriétés optionnelles telles que font-weight, font-style, etc. */
+}
+
 html, body {
     padding: 0;
     margin: 0;
@@ -50,8 +58,46 @@ html {
             justify-content: center;
             align-items: center;
 
+            #logo{
+                position: absolute;
+                top: 0;
+                margin: 8vh 0 0 0;
+                padding: 0;
+                height: auto;
+                left: 0;
+                h1 {
+                    font-size: 1.5rem;
+                    color: rgb(230, 229, 229);
+                    text-align: center;
+                    position: relative;
+                    padding: 0;
+                    margin: 0 0 0 5vw;
+                    width: 100vw;
+                    font-family: "TopFood";
+                    font-size: 2rem;
+                    letter-spacing: 2px;
+                    background-image: linear-gradient(to bottom right, #fec163, #de4313);
+                    color: transparent;
+                    background-clip: text;
+                    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+                }
+    
+                h1::before {
+                    content: "";
+                    background-image: url(../assets/imgs/png/logo.png);
+                    position: absolute;
+                    display: block;
+                    background-size: 45px 45px;
+                    left: 15%;
+                    top: -10%;
+                    width: 45px;
+                    height: 45px;
+                    background-repeat: no-repeat;
+                }
+            }
+
             #logchoice {
-                margin-top: 10vh;
+                // margin-top: 20vh;
                 display: flex;
                 flex-flow: wrap row;
                 justify-content: center;
@@ -59,7 +105,7 @@ html {
                 align-items: center;
                 width: 100vw;
                 position: absolute;
-                top: 0;
+                top: 20vh;
 
                 button {
                     font-size: 1.5em;
@@ -107,12 +153,13 @@ html {
                 height: 100vh;
                 display: flex;
                 flex-flow: wrap column;
-                top: 15vh;
+                margin-top: 2vh;
                 align-items: center;
                 align-content: center;
                 text-align: center;
                 gap: 20px;
                 position: absolute;
+                top: 27vh;
                 left: 6vw;
                 transition: left 0.3s ease;
 
@@ -139,7 +186,7 @@ html {
                     display: flex;
                     gap: 10px;
                     flex-flow: wrap column;
-                    margin-top: 8vh;
+                    margin-top: 0vh;
                 }
 
                 input {
@@ -190,6 +237,182 @@ html {
                 border-radius: 10px;
                 padding: 15px;
                 text-align: center;
+            }
+        }
+
+        main {
+
+            .like{
+                width: fit-content;
+                height: 35px;
+                background-color: transparent;
+                border: none;
+                margin: 1vh 0 1vh 2vw;
+                color: rgba($color: $blanc, $alpha: .8);
+                display: flex;
+                flex-flow: wrap row;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                font-weight: bold;
+                font-size: 1rem;
+            }
+
+            .anim {
+                animation: animLike 0.4s ease-in-out;
+            }
+
+            .liked{
+                color: #f91880;
+            }
+
+            .postsContainer{
+                display: flex;
+                flex-flow: wrap row;
+                justify-content: center;
+                align-items: center;
+                gap: 2vh;
+                font-family: Arial, sans-serif;
+
+                .noPost{
+                    color: $blanc;
+                    // margin-top: 10vh;
+                }
+
+                #skPost{
+                    width: 75vw;
+                    height: 30vh;
+                    border-radius: 10px;
+                    margin-top: 5vh;
+                }
+
+                .post{
+                    width: 67vw;
+                    background-color: $input;
+                    // margin-top: 5vh;
+                    border-radius: 10px;
+                    display: flex;
+                    flex-flow: wrap row;
+                    position: relative;
+
+                    .deleteModal{
+                        background-image: url('../assets/imgs/svg/modal.svg');
+                        width: 20px;
+                        height: 20px;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-color: transparent;
+                        border: none;
+                        position: absolute;
+                        top: 10px;
+                        right: 15px;
+                        transform: rotate(90deg);
+                    }
+
+                    .modal{
+                        position: absolute;
+                        background-color: $input;
+                        border: 1px solid rgba($color: $blanc, $alpha: .2);
+                        top: 35px;
+                        right: -20px;
+                        padding: 7px 10px 10px 10px;
+                        border-radius: 5px;
+                        height: 15px;
+                        display: none;
+                    }
+
+                    img{
+                        width: 100%;
+                        object-fit: contain;
+                    }
+
+                    .ppName{
+                        display: flex;
+                        flex-flow: wrap row;
+                        justify-content: start;
+                        align-items: center;
+                        padding: 2vh 0 1.5vh 2vh;
+                        gap: 3vw;
+                        img{
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+
+                        .uName{
+                            max-width: 70%;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    }
+
+                    .postTxt{
+                        width: 100%;
+                        position: relative;
+                        color: $blanc;
+                        font-family: Arial, sans-serif;
+
+                        h3, h4, p{
+                        margin: 0;
+                        padding: 2vh 2vh 0 2vh;
+                        }
+
+                        .noteContainer{
+                            display: flex;
+                            flex-flow: wrap row;
+                            justify-content: start;
+                            align-items: center;
+                            padding: 2vh 2vh 0 2vh;
+
+                            h4{
+                                padding: 0;
+                                margin-right: 2vw;
+                            }
+
+                            .note{
+                                color: $boutons;
+                                // padding: .5vh 2vh 0 2vh;
+                                // height: 24px;
+                            }
+                        }
+
+                        p{
+                            font-size: .8rem;
+                        }
+
+                        .date{
+                            font-size: .7rem;
+                            color: $blanc;
+                            padding: .5vh 0 1vh 0;
+                            opacity: .6;
+                            margin: 0 0 1vh 3.5vw;
+                            position: relative;
+                        }
+                    }
+
+                    .postTxt.zeroImg{
+
+                        width: 100%;
+
+                        .deleteBtn{
+                            background-image: url('../assets/imgs/svg/deleteBtn.svg');
+                            width: 15px;
+                            height: 15px;
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-color: transparent;
+                            border: none;
+                            position: absolute;
+                            // transform: translateX(1000%) translateY(-200%);
+                        }
+                    }
+
+                    a{
+                        color: $blanc;
+                    }
+                }
             }
         }
         

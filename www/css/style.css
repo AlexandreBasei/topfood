@@ -1,42 +1,31 @@
-@charset "UTF-8";
 @import url(./main.css);
-@font-face {
-  font-family: "TopFood"; /* Remplacez par le nom que vous souhaitez donner à votre police */
-  src: url("../assets/fonts/zh-cn.woff2") format("woff2"), url("../assets/fonts/one_slice-webfont.woff") format("woff"); /* Format WOFF */
-  /* Autres propriétés optionnelles telles que font-weight, font-style, etc. */
-}
-@font-face {
-  font-family: "TopFood2"; /* Remplacez par le nom que vous souhaitez donner à votre police */
-  src: url("../assets/fonts/hyliaserifbeta-regular-webfont.woff2") format("woff2"), url("../assets/fonts/hyliaserifbeta-regular-webfont.woff") format("woff"); /* Format WOFF */
-  /* Autres propriétés optionnelles telles que font-weight, font-style, etc. */
-}
 html body header {
-  margin-top: 0;
-  padding-top: 0;
-  height: 8vh;
+  margin: 0;
+  padding: 0;
   display: flex;
+  position: fixed;
   flex-flow: wrap row;
   align-items: center;
   justify-content: center;
   background-color: #202020;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
+  width: 100vw;
+  z-index: 15;
 }
 html body header h1 {
   font-size: 1.5rem;
   color: rgb(230, 229, 229);
   text-align: center;
   position: relative;
-  width: -moz-fit-content;
-  width: fit-content;
-  margin: 0 0 0 5vw;
+  width: 100vw;
+  margin: 2vh 0 4vh 8vw;
   font-family: "TopFood";
   letter-spacing: 2px;
   background-image: linear-gradient(to bottom right, #fec163, #de4313);
   color: transparent;
   -webkit-background-clip: text;
           background-clip: text;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 html body header h1::before {
   content: "";
@@ -44,31 +33,126 @@ html body header h1::before {
   position: absolute;
   display: block;
   background-size: 35px 35px;
-  left: -50px;
-  top: -15%;
+  left: 20%;
+  top: -10%;
   width: 35px;
   height: 35px;
 }
-html body header button {
-  position: absolute;
-  left: 88vw;
-  border: none;
-  background-color: transparent;
-  background-image: url(../assets/imgs/svg/bell.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 40px;
-  height: 25px;
-  width: 25px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+html body header div button:first-child {
+  margin-right: 20vw;
 }
-html body main button {
-  margin-top: 10vh;
-  background-color: red;
-  padding: 20px;
-  color: rgb(202, 202, 202);
-  border-radius: 10px;
+html body header button {
+  background-color: transparent;
   border: none;
+  color: rgb(202, 202, 202);
+  font-size: 1rem;
+  font-weight: 550;
+  padding-bottom: 1vh;
+  border-radius: 5px;
+  letter-spacing: 0.5px;
+  border-bottom: 5px solid transparent;
+}
+html body header .selected {
+  border-bottom: 5px solid rgb(202, 202, 202);
+  transition: all 0.3s ease;
+}
+html body #indexMain .postsContainer {
+  margin: 20vh 0 0 0;
+  width: 100vw;
+  position: absolute;
+  transition: left 0.3s ease;
+}
+html body #indexMain .postsContainer .post {
+  width: 100vw;
+  padding-right: 0;
+  border-radius: 0;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(202, 202, 202, 0.1);
+}
+html body #indexMain .postsContainer .post .ppName {
+  padding-top: 0;
+}
+html body #indexMain .postsContainer .post:last-child {
+  border-bottom: none;
+  margin-bottom: 5vh;
+}
+html body #indexMain .postsContainer .skPost {
+  width: 100vw;
+  margin: 1vh 0 0 0;
+}
+html body #indexMain .postsContainer .skPost #skPPContainer {
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: start;
+  align-items: center;
+  padding: 0;
+  margin: 0 0 0 4vw;
+  gap: 3vw;
+}
+html body #indexMain .postsContainer .skPost #skPPContainer #skPP {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+html body #indexMain .postsContainer .skPost #skPPContainer p {
+  width: 20vw;
+  margin: 0 0 0 4vw;
+  padding: 0;
+}
+html body #indexMain .postsContainer .skPost #skImg {
+  width: 100vw;
+  height: 30vh;
+  margin: 3vh 0 3vh 0;
+}
+html body #indexMain .postsContainer .skPost #skResto {
+  width: 30vw;
+  margin: 5vh 0 0 4vw;
+  height: 1.5vh;
+}
+html body #indexMain .postsContainer .skPost #skNote {
+  width: 20vw;
+  margin: 3vh 0 0 4vw;
+  height: 1.2vh;
+}
+html body #indexMain .postsContainer .skPost .skDesc {
+  width: 50vw;
+  margin: 3vh 0 0 4vw;
+  height: 1vh;
+}
+html body #indexMain .postsContainer .skPost #skDesc {
+  width: 40vw;
+  margin: 3vh 0 0 4vw;
+  height: 1vh;
+}
+html body #indexMain .postsContainer:last-child {
+  padding-bottom: 7vh;
+}
+html body #indexMain .containerSelected {
+  left: 0vw;
+}
+html body #indexMain .gauche {
+  left: -100vw;
+}
+html body #indexMain .droite {
+  left: 100vw;
+}
+html body #indexMain #noPost {
+  color: rgb(202, 202, 202);
+  font-family: Arial, sans-serif;
+  width: 80vw;
+  text-align: center;
+  margin: 40vh 0 0 0;
+  padding: 0 10vw 0 10vw;
+  position: relative;
+}
+@keyframes animLike {
+  0% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }/*# sourceMappingURL=style.css.map */

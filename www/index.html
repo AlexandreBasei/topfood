@@ -17,6 +17,7 @@
     <script src="./js/main.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js" integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./config.js"></script>
     <script src="./connexion.js"></script>
     <script src="./topfood.js"></script>
@@ -25,12 +26,18 @@
 
 <body>
     <header>
-        <!-- <img src="./assets/imgs/png/logo.png" alt="logo topfood"> -->
         <h1>TopFood</h1>
-        <button></button>
+        <div class="feedType">
+            <button id="abonnements" class="selected">Abonnements</button>
+            <button id="populaire">Populaire</button>
+        </div>
     </header>
 
     <section id="log">
+        <section id="logo" class="logo">
+            <h1>TopFood</h1>
+        </section>
+
         <div id="logchoice">
             <button class="normal" id="btnlog">Connexion</button>
             <button id="btnsign">Inscription</button>
@@ -59,8 +66,22 @@
         <p>Connecté en tant que :</p>
     </div>
 
-    <main>
-        <section id="postsContainer"></section>
+    <main id="indexMain">
+        <section id="postsContainer" class="postsContainer containerSelected">
+            <div class="skPost">
+                <div id="skPPContainer">
+                    <div id="skPP" class="skeleton"></div>
+                    <p class="skeleton skeleton-text"></p>
+                </div>
+                <div class="skeleton" id="skImg"></div>
+                <p id="skResto" class="skeleton skeleton-text"></p>
+                <p id="skNote" class="skeleton skeleton-text"></p>
+                <p class="skDesc skeleton skeleton-text"></p>
+                <p id="skDesc" class="skeleton skeleton-text"></p>
+            </div>
+        </section>
+
+        <section id="postsContainer2" class="postsContainer droite"></section>
     </main>
     <nav>
         <a href="index.html" id="home"></a>

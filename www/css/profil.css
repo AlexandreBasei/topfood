@@ -3,6 +3,34 @@ html body main {
   color: rgb(202, 202, 202);
   font-family: Arial, sans-serif;
 }
+html body main .back {
+  position: absolute;
+  border: none;
+  background-color: transparent;
+  top: 10px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  background-image: url(../assets/imgs/svg/arrowBack.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+html body main .back::after {
+  content: "Modifier le profil";
+  color: rgb(202, 202, 202);
+  width: 100vw;
+  position: absolute;
+  left: -10px;
+  font-size: 1.3rem;
+  top: 5px;
+  font-weight: bold;
+}
+html body main .back1::after {
+  content: "Followers";
+}
+html body main .back2::after {
+  content: "Suivi(e)s";
+}
 html body main #editPanel.activePanel {
   top: 0;
 }
@@ -22,19 +50,7 @@ html body main #editPanel {
   align-items: center;
   transition: top 0.35s ease-in-out;
 }
-html body main #editPanel #back {
-  position: absolute;
-  border: none;
-  background-color: transparent;
-  top: 10px;
-  left: 10px;
-  width: 30px;
-  height: 30px;
-  background-image: url(../assets/imgs/svg/arrowBack.svg);
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-html body main #editPanel #back::after {
+html body main #editPanel .back::after {
   content: "Modifier le profil";
   color: rgb(202, 202, 202);
   width: 100vw;
@@ -136,6 +152,10 @@ html body main #ppContainer h2 {
 html body main #ppContainer h3 {
   margin: 1vh 0 0 0;
 }
+html body main #ppContainer #suivi {
+  width: 50vw;
+  text-align: center;
+}
 html body main #ppContainer h2.skeleton {
   max-width: 25%;
   height: 1rem;
@@ -143,8 +163,24 @@ html body main #ppContainer h2.skeleton {
 }
 html body main #ppContainer h3.skeleton {
   width: 30%;
+}
+html body main #ppContainer h3.skeleton #suivi.skeleton {
+  width: 25%;
   margin: 10px 0 0 5%;
   height: 0.75rem;
+}
+html body main #ppContainer #suivi.skeleton {
+  width: 25%;
+  margin-top: 20px;
+  position: relative;
+}
+html body main #ppContainer #publiFollow {
+  width: 100%;
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 html body main #pp.skeleton {
   transform: translateX(7vw);
@@ -166,24 +202,26 @@ html body main #btnContainer {
   flex-flow: wrap row;
   justify-content: center;
   align-items: center;
-  margin: 5vh 0 10vh 0;
+  margin: 5vh 0 5vh 0;
   gap: 6vw;
 }
 html body main #btnContainer button {
   border: none;
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: 30px;
+  padding: 15px;
   background-color: #3c3c3c;
   color: rgb(202, 202, 202);
   font-weight: bold;
 }
 html body main #btnContainer #btnLogOut {
   background-color: rgb(250, 54, 54);
+  color: rgb(16, 16, 16);
+  font-weight: bolder;
 }
 html body main #btnFollow {
   width: 25vw;
   padding: 10px 0 10px 0;
-  border-radius: 10px;
+  border-radius: 30px;
   border: 2px solid transparent;
   font-size: 1.2rem;
   font-weight: bold;
@@ -197,11 +235,13 @@ html body main #btnFollow.followed {
   color: rgb(202, 202, 202);
 }
 html body main #postsContainer {
+  margin-bottom: 10vh;
   display: flex;
   flex-flow: wrap row;
   justify-content: center;
   align-items: center;
   gap: 2vh;
+  font-family: Arial, sans-serif;
 }
 html body main #postsContainer .noPost {
   color: rgb(202, 202, 202);
@@ -213,25 +253,48 @@ html body main #postsContainer #skPost {
   margin-top: 5vh;
 }
 html body main #postsContainer .post {
-  width: 75vw;
+  width: 67vw;
   background-color: #262626;
   border-radius: 10px;
   display: flex;
   flex-flow: wrap row;
+  position: relative;
+}
+html body main #postsContainer .post .deleteModal {
+  background-image: url("../assets/imgs/svg/modal.svg");
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  transform: rotate(90deg);
+}
+html body main #postsContainer .post .modal {
+  position: absolute;
+  background-color: #262626;
+  border: 1px solid rgba(202, 202, 202, 0.2);
+  top: 35px;
+  right: -20px;
+  padding: 7px 10px 10px 10px;
+  border-radius: 5px;
+  height: 15px;
+  display: none;
 }
 html body main #postsContainer .post img {
-  width: 45%;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 html body main #postsContainer .post .ppName {
   display: flex;
   flex-flow: wrap row;
   justify-content: start;
   align-items: center;
-  padding: 2vh 0 0vh 2vh;
+  padding: 2vh 0 1.5vh 2vh;
   gap: 3vw;
 }
 html body main #postsContainer .post .ppName img {
@@ -241,40 +304,51 @@ html body main #postsContainer .post .ppName img {
   -o-object-fit: cover;
      object-fit: cover;
 }
+html body main #postsContainer .post .ppName .uName {
+  max-width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 html body main #postsContainer .post .postTxt {
-  width: 55%;
+  width: 100%;
   position: relative;
+  color: rgb(202, 202, 202);
+  font-family: Arial, sans-serif;
 }
-html body main #postsContainer .post .postTxt .date {
-  font-size: 0.6rem;
-  padding: 0.5vh 0 1vh 0;
-  margin-left: 40%;
-  opacity: 0.6;
-}
-html body main #postsContainer .post .postTxt h3, html body main #postsContainer .post .postTxt h4, html body main #postsContainer .post .postTxt p {
+html body main #postsContainer .post .postTxt h3,
+html body main #postsContainer .post .postTxt h4,
+html body main #postsContainer .post .postTxt p {
   margin: 0;
   padding: 2vh 2vh 0 2vh;
+}
+html body main #postsContainer .post .postTxt .noteContainer {
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: start;
+  align-items: center;
+  padding: 2vh 2vh 0 2vh;
+}
+html body main #postsContainer .post .postTxt .noteContainer h4 {
+  padding: 0;
+  margin-right: 2vw;
+}
+html body main #postsContainer .post .postTxt .noteContainer .note {
+  color: #0099ff;
 }
 html body main #postsContainer .post .postTxt p {
   font-size: 0.8rem;
 }
-html body main #postsContainer .post .postTxt .deleteBtn {
-  background-image: url("../assets/imgs/svg/deleteBtn.svg");
-  width: 15px;
-  height: 15px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  border: none;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+html body main #postsContainer .post .postTxt .date {
+  font-size: 0.7rem;
+  color: rgb(202, 202, 202);
+  padding: 0.5vh 0 1vh 0;
+  opacity: 0.6;
+  margin: 0 0 1vh 3.5vw;
+  position: relative;
 }
 html body main #postsContainer .post .postTxt.zeroImg {
   width: 100%;
-}
-html body main #postsContainer .post .postTxt.zeroImg .date {
-  margin: 1vh 0 0 20%;
 }
 html body main #postsContainer .post .postTxt.zeroImg .deleteBtn {
   background-image: url("../assets/imgs/svg/deleteBtn.svg");
@@ -289,9 +363,193 @@ html body main #postsContainer .post .postTxt.zeroImg .deleteBtn {
 html body main #postsContainer .post a {
   color: rgb(202, 202, 202);
 }
-html body main #postsContainer .post .note {
-  color: #0099ff;
+html body main #postsContainer #vosPubli {
+  margin: 0.7vh 0 1vh 0;
+  text-align: left;
+  width: 75vw;
+  display: none;
+  position: relative;
 }
-html body main #postsContainer .noImgPost {
+html body main #postsContainer #vosPubli::before {
+  content: "";
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  background-color: rgb(202, 202, 202);
+  opacity: 0.1;
+  left: -20vw;
+  top: -2.5vh;
+  width: 150vw;
+  height: 1px;
+}
+html body main .statsContainerContainer {
+  position: relative;
+  height: 25vh;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+html body main .statsContainerContainer #statsContainer {
+  display: flex;
+  position: absolute;
+  flex-flow: wrap row;
+  width: 100vw;
+  justify-content: start;
+  align-items: center;
+  gap: 0vw;
+  margin: 0 0 5vh 10vw;
+}
+html body main .statsContainerContainer #statsContainer canvas {
+  background-color: rgb(16, 16, 16);
+  padding: 10px;
+  border-radius: 10px;
+  opacity: 1;
+}
+html body main .statsContainerContainer #statsContainer .graphecontainer {
   width: 35vw;
+  position: relative;
+}
+html body main .statsContainerContainer #statsContainer .canvasTxt {
+  background-color: rgb(16, 16, 16);
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  display: flex;
+  flex-flow: wrap column;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+  font-size: 1.5rem;
+}
+html body main .statsContainerContainer #statsContainer .canvasTxt div {
+  font-size: 1rem;
+}
+html body main .statsContainerContainer #topContainer {
+  display: flex;
+  position: absolute;
+  flex-flow: wrap row;
+  width: -moz-fit-content;
+  width: fit-content;
+  justify-content: start;
+  align-items: start;
+  gap: 10vw;
+  margin: 0 0 5vh 10vw;
+}
+html body main .statsContainerContainer #topContainer .topRestau {
+  margin-bottom: 2vh;
+}
+html body main .statsContainerContainer #topContainer .topRestau a {
+  color: rgb(202, 202, 202);
+  text-decoration: none;
+}
+html body main .statsContainerContainer #topContainer .topRestau .note {
+  color: #0099ff;
+  font-weight: 600;
+}
+html body main .statsContainerContainer#topContainerContainer {
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+  max-height: 63vh;
+}
+html body main #statsContainerContainer::-webkit-scrollbar {
+  display: none;
+}
+html body main .liste {
+  min-height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 100vw;
+  transition: left 0.3s ease;
+  background-color: rgb(16, 16, 16);
+  z-index: 10;
+}
+html body main .liste ul {
+  width: 100vw;
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+  align-items: center;
+  margin: 10vh 0 0 0;
+  padding: 0;
+  gap: 20px;
+}
+html body main .liste ul li {
+  margin: 0;
+  list-style: none;
+  width: 90vw;
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+  padding-left: 10vw;
+}
+html body main .liste ul img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+html body main .liste ul a {
+  font-size: 1.1rem;
+  color: rgb(202, 202, 202);
+}
+html body main .liste ul button {
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 2px solid transparent;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: #0099ff;
+  transition: background-color 0.2s ease;
+}
+html body main .liste ul .desac {
+  opacity: 0;
+  pointer-events: none;
+}
+html body main .liste ul .followed {
+  background-color: transparent;
+  border: 2px solid rgb(202, 202, 202);
+  color: rgb(202, 202, 202);
+}
+html body main .liste.displayList {
+  left: 0;
+}
+html body main .like {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 35px;
+  background-color: transparent;
+  border: none;
+  margin: 1vh 0 1vh 2vw;
+  color: rgba(202, 202, 202, 0.8);
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+html body main .anim {
+  animation: animLike 0.4s ease-in-out;
+}
+html body main .liked {
+  color: #f91880;
+}
+@keyframes animLike {
+  0% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }/*# sourceMappingURL=profil.css.map */

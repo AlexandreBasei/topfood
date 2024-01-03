@@ -1,11 +1,11 @@
 {
-  "appId": "com.example.app",
+  "appId": "topfood.app",
   "appName": "TopFood",
   "bundledWebRuntime": false,
   "webDir": "www",
   "plugins": {
     "SplashScreen": {
-      "launchShowDuration": 10
+      "launchShowDuration": 200
     },
     "PushNotifications": {
       "presentationOptions": ["badge", "sound", "alert"]

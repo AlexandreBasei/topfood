@@ -22,6 +22,7 @@ html body main #publier {
   position: absolute;
   top: 5vw;
   left: 70vw;
+  border-radius: 30px;
 }
 html body main #publier.desac {
   opacity: 0.5;
@@ -40,6 +41,7 @@ html body main #publication #photo {
   width: 60vw;
   padding: 15px 10px 15px 50px;
   color: #262626;
+  border-radius: 30px;
 }
 html body main #publication #photo::before {
   content: "";
@@ -59,26 +61,11 @@ html body main #publication img {
 }
 html body main #publication input {
   color: rgb(202, 202, 202);
-  width: 85vw;
+  width: 75vw;
   background-color: #262626;
   border: none;
-  border-radius: 10px;
-  padding: 2vh 10px 2vh 10px;
-}
-html body main #publication #autocomplete {
-  padding: 2vh 10px 2vh 40px;
-  width: 90vw;
-}
-html body main #publication #searchIcon::after {
-  content: "";
-  background-image: url("../assets/imgs/svg/search.svg");
-  width: 20px;
-  height: 20px;
-  background-size: contain;
-  display: block;
-  position: absolute;
-  transform: translateX(45%) translateY(-155%);
-  background-repeat: no-repeat;
+  border-radius: 30px;
+  padding: 2vh 20px 2vh 20px;
 }
 html body main #publication input:focus {
   outline: none;
@@ -157,4 +144,44 @@ html body main #publication .stars .star {
 }
 html body main #publication .stars .active {
   background-image: url("../assets/imgs/svg/star-active.svg");
+}
+html body main #publication #search-input {
+  width: 65vw;
+}
+html body main #publication #search-container {
+  position: relative;
+  margin-bottom: 5vh;
+}
+html body main #publication #results-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  color: #262626;
+  width: 100%;
+  margin: 0;
+}
+html body main #publication .result-item {
+  padding: 8px;
+  cursor: pointer;
+  border-top: 1px solid rgba(202, 202, 202, 0.3);
+}
+html body main #publication .result-item:hover {
+  background-color: #f0f0f0;
+}
+html body main #publication #reset-button {
+  pointer-events: none;
+  opacity: 0.5;
+  border-radius: 30px;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 10px 15px 10px 15px;
+  margin-left: -30px;
+  background-color: rgb(202, 202, 202);
 }/*# sourceMappingURL=add.css.map */

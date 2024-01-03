@@ -29,6 +29,10 @@
 
 <body>
     <section id="log">
+        <section id="logo">
+            <h1>TopFood</h1>
+        </section>
+        
         <div id="logchoice">
             <button class="normal" id="btnlog">Connexion</button>
             <button id="btnsign">Inscription</button>
@@ -62,13 +66,19 @@
             <button id="photo">Ajouter une image</button>
             <img src="" alt="">
 
-            <div id="searchIcon"><input type="search" class="searchIcon" id="autocomplete" placeholder="Rechercher un restaurant"></div>
+            <input type="search" class="searchIcon" id="autocomplete" placeholder="Rechercher un restaurant">
             <!-- <button id="getCurrentLocation" onclick="getCurrentLocation()">Utiliser votre position</button> -->
-            <h3>Restaurant sélectionné :</h3>
 
-            <p  id="details" class="details">Aucun restaurant sélectionné</p>
+            <p  id="details" class="details" style="display: none;">Aucun restaurant sélectionné</p>
 
-            <input type="text" id="plat" class="wideInput" placeholder="Plat consommé...">
+            <section id="search-container">
+                <input type="text" id="search-input" placeholder="Rechercher un plat" autocomplete="off">
+                <div id="results-container"></div>
+            </section>
+
+            <p id="detailsPlat" class="details" style="display: none;"></p>
+
+            <!-- <input type="text" id="plat" class="wideInput" placeholder="Plat consommé..."> -->
 
             <textarea class="wideInput" cols="30" rows="5" placeholder="Avis..."></textarea>
 

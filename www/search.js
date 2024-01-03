@@ -68,7 +68,7 @@ const handleSearch = () => {
                         currentRef.once("value", async (snapshot2) => {
                             let currentData = snapshot2.val();
 
-                            if (followed.includes(userId) == false && currentData.defaultpp == 1 && firebase.auth().currentUser.uid != userId) {
+                            if (!followed.includes(userId) && currentData.defaultpp == 1 && firebase.auth().currentUser.uid !== userId) {
                                 listItem.innerHTML = `
                                 <a href='./profil.html?userId=${userId}'><img src="${await getDefaultImg()}"></a>
                                 <a href='./profil.html?userId=${userId}'>${userData.name}</a>
@@ -76,7 +76,8 @@ const handleSearch = () => {
                               `;
                                 searchResults.appendChild(listItem);
                             }
-                            else if (followed.includes(userId) && currentData.defaultpp == 1 && firebase.auth().currentUser.uid != userId) {
+                            else if (followed.includes(userId) && currentData.defaultpp == 1 && firebase.auth().currentUser.uid !== userId) {
+                                console.log("esesesesseeses");
                                 listItem.innerHTML = `
                                 <a href='./profil.html?userId=${userId}'><img src="${await getDefaultImg()}"></a>
                                 <a href='./profil.html?userId=${userId}'>${userData.name}</a>
@@ -84,7 +85,7 @@ const handleSearch = () => {
                               `;
                                 searchResults.appendChild(listItem);
                             }
-                            else if (followed.includes(userId) && currentData.defaultpp == 0 && firebase.auth().currentUser.uid != userId) {
+                            else if (followed.includes(userId) && currentData.defaultpp == 0 && firebase.auth().currentUser.uid !== userId) {
                                 listItem.innerHTML = `
                                 <a href='./profil.html?userId=${userId}'><img src="${await getImg(userId)}"></a>
                                 <a href='./profil.html?userId=${userId}'>${userData.name}</a>
@@ -92,7 +93,7 @@ const handleSearch = () => {
                               `;
                                 searchResults.appendChild(listItem);
                             }
-                            else if (followed.includes(userId) == false && currentData.defaultpp == 0 && firebase.auth().currentUser.uid != userId) {
+                            else if (!followed.includes(userId) && currentData.defaultpp == 0 && firebase.auth().currentUser.uid !== userId) {
                                 listItem.innerHTML = `
                                 <a href='./profil.html?userId=${userId}'><img src="${await getImg(userId)}"></a>
                                 <a href='./profil.html?userId=${userId}'>${userData.name}</a>
@@ -113,49 +114,71 @@ const handleSearch = () => {
     })
 }
 
-const follow = (uid) => {
+const follow = async (uid) => {
     const id = uid.id;
-    const usersRef = firebase.database().ref(`users/${firebase.auth().currentUser.uid}`);
+    const followerId = firebase.auth().currentUser.uid;
 
-    const ref2 = firebase.database().ref("users/" + id + '/followers');
+    const usersRef = firebase.database().ref(`users/${followerId}`);
 
-    usersRef.once('value', (snapshot) => {
-        let currentFollows = snapshot.val().followed || ""; // Assurez-vous d'avoir une chaîne vide si la valeur est null
+    const usersRef2 = firebase.database().ref(`users/${id}`);
 
-        // Si l'élément a déjà la classe 'followed', cela signifie que l'utilisateur veut arrêter de suivre
-        if (document.getElementById(id).classList.contains("followed")) {
-            // Retirez l'ID de la liste
-            currentFollows = currentFollows.split(',').filter(item => item !== id).join(',');
+    const ref2 = firebase.database().ref("users/" + id + '/nbFollowers');
 
-            usersRef.update({ followed: currentFollows });
+    const ref3 = firebase.database().ref("users/" + followerId + '/nbFollowed');
 
-            ref2.transaction((val) => {
-                return Math.max(val - 1, 0);
-            })
+    const snapshot = await usersRef.once("value");
+    const snapshot2 = await usersRef2.once("value");
 
-            document.getElementById(id).classList.remove("followed");
-            document.getElementById(id).innerText = "Suivre";
-        } else {
-            // Vérifiez si la valeur est déjà présente avant de l'ajouter
-            if (!currentFollows.includes(id)) {
-                if (currentFollows !== "") {
-                    currentFollows += ",";
-                }
-                currentFollows += id;
+    let currentFollowed = snapshot.val().followed || ""; // Assurez-vous d'avoir une chaîne vide si la valeur est null
+    let currentFollowers = snapshot2.val().followers || "";
 
-                ref2.transaction((val) => {
-                    return val + 1;
-                })
+    // Si l'élément a déjà la classe 'followed', cela signifie que l'utilisateur veut arrêter de suivre
+    if (document.getElementById(id).classList.contains("followed")) {
+        // Retirez l'ID de la liste
+        currentFollowed = currentFollowed.split(',').filter(item => item !== id).join(',');
+        currentFollowers = currentFollowers.split(',').filter(item => item !== followerId).join(',');
 
-                usersRef.update({ followed: currentFollows });
+        usersRef.update({ followed: currentFollowed });
 
-                //  
+        usersRef2.update({ followers: currentFollowers });
 
-                document.getElementById(id).classList.add("followed");
-                document.getElementById(id).innerText = "Suivi(e)";
-            }
+        ref2.transaction((val) => {
+            return Math.max(val - 1, 0);
+        })
+
+        ref3.transaction((val) => {
+            return Math.max(val - 1, 0); // Décrémentez d'au plus 1, mais ne descendez jamais en dessous de zéro
+        });
+
+        document.getElementById(id).classList.remove("followed");
+        document.getElementById(id).innerText = "Suivre";
+    }
+
+    else {
+        if (currentFollowed !== "") {
+            currentFollowed += ",";
         }
-    });
+
+        currentFollowed += id;
+
+        if (currentFollowers !== "") {
+            currentFollowers += ",";
+        }
+
+        currentFollowers += followerId;
+
+        const newRef2Value = snapshot.val().nbFollowed + 1;
+        const newRef3Value = snapshot2.val().nbFollowers + 1;
+
+        await usersRef.update({ nbFollowed: newRef2Value });
+        await usersRef2.update({ nbFollowers: newRef3Value });
+
+        usersRef.update({ followed: currentFollowed });
+        usersRef2.update({ followers: currentFollowers });
+
+        document.getElementById(id).classList.add("followed");
+        document.getElementById(id).innerText = "Suivi(e)";
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

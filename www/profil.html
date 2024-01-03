@@ -19,6 +19,7 @@
     <script nomodule
         src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./js/main.js"></script>
     <script src="./config.js"></script>
     <script src="./connexion.js"></script>
@@ -27,6 +28,10 @@
 
 <body>
     <section id="log">
+        <section id="logo">
+            <h1>TopFood</h1>
+        </section>
+        
         <div id="logchoice">
             <button class="normal" id="btnlog">Connexion</button>
             <button id="btnsign">Inscription</button>
@@ -54,7 +59,7 @@
     <main>
 
         <section id="editPanel">
-            <button id="back"></button>
+            <button class="back" id="back"></button>
 
             <div id="ppEditContainer">
                 <img id="ppEdit">
@@ -72,27 +77,51 @@
 
         </section>
 
+        <section id="followerList" class="liste">
+            <button class="back back1" onclick="hide('followerList')"></button>
+            <ul></ul>
+        </section>
+
+        <section id="followedList" class="liste">
+            <button class="back back2" onclick="hide('followedList')"></button>
+            <ul></ul>
+        </section>
+
         <section id="ppContainer">
             <div class="PPName">
                 <img id="pp" class="skeleton">
                 <h2 id="name" class="skeleton skeleton-text"></h2>
                 <button id="btnFollow">Suivre</button>
             </div>
-            <h3 id="publi" class="skeleton skeleton-text"></h3>
-            <h3 id="follow" class="skeleton skeleton-text"></h3>
+            <div id="publiFollow">
+                <h3 id="publi" class="skeleton skeleton-text"></h3>
+                <h3 id="follow" class="skeleton skeleton-text"></h3>
+            </div>
+            <h3 id="suivi" class="skeleton skeleton-text"></h3>
         </section>
 
         <p id="desc" class="skeleton skeleton-text"></p>
 
-        <section id="postsContainer">
-            <div id="skPost" class="skeleton"></div>
-        </section>
-
         <div id="btnContainer">
             <button id="edit">Modifier le profil</button>
-            <button>Partager le profil</button>
+            <!-- <button>Partager le profil</button> -->
             <button id="btnLogOut">Se déconnecter</button>
         </div>
+
+        <section class="statsContainerContainer">
+            <div id="statsContainer"></div>
+        </section>
+
+        <section class="statsContainerContainer" id="topContainerContainer">
+            <section id="topContainer"></section>
+        </section>
+        
+        
+
+        <section id="postsContainer">
+            <h4 id="vosPubli"></h4>
+            <div id="skPost" class="skeleton"></div>
+        </section>
 
     </main>
     <nav>

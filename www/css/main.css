@@ -1,3 +1,9 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "TopFood"; /* Remplacez par le nom que vous souhaitez donner à votre police */
+  src: url("../assets/fonts/zh-cn.woff2") format("woff2"), url("../assets/fonts/one_slice-webfont.woff") format("woff"); /* Format WOFF */
+  /* Autres propriétés optionnelles telles que font-weight, font-style, etc. */
+}
 html, body {
   padding: 0;
   margin: 0;
@@ -44,8 +50,44 @@ html body #log {
   justify-content: center;
   align-items: center;
 }
+html body #log #logo {
+  position: absolute;
+  top: 0;
+  margin: 8vh 0 0 0;
+  padding: 0;
+  height: auto;
+  left: 0;
+}
+html body #log #logo h1 {
+  font-size: 1.5rem;
+  color: rgb(230, 229, 229);
+  text-align: center;
+  position: relative;
+  padding: 0;
+  margin: 0 0 0 5vw;
+  width: 100vw;
+  font-family: "TopFood";
+  font-size: 2rem;
+  letter-spacing: 2px;
+  background-image: linear-gradient(to bottom right, #fec163, #de4313);
+  color: transparent;
+  -webkit-background-clip: text;
+          background-clip: text;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+html body #log #logo h1::before {
+  content: "";
+  background-image: url(../assets/imgs/png/logo.png);
+  position: absolute;
+  display: block;
+  background-size: 45px 45px;
+  left: 15%;
+  top: -10%;
+  width: 45px;
+  height: 45px;
+  background-repeat: no-repeat;
+}
 html body #log #logchoice {
-  margin-top: 10vh;
   display: flex;
   flex-flow: wrap row;
   justify-content: center;
@@ -53,7 +95,7 @@ html body #log #logchoice {
   align-items: center;
   width: 100vw;
   position: absolute;
-  top: 0;
+  top: 20vh;
 }
 html body #log #logchoice button {
   font-size: 1.5em;
@@ -94,12 +136,13 @@ html body #log section {
   height: 100vh;
   display: flex;
   flex-flow: wrap column;
-  top: 15vh;
+  margin-top: 2vh;
   align-items: center;
   align-content: center;
   text-align: center;
   gap: 20px;
   position: absolute;
+  top: 27vh;
   left: 6vw;
   transition: left 0.3s ease;
 }
@@ -124,7 +167,7 @@ html body #log section form {
   display: flex;
   gap: 10px;
   flex-flow: wrap column;
-  margin-top: 8vh;
+  margin-top: 0vh;
 }
 html body #log section input {
   color: rgb(202, 202, 202);
@@ -168,6 +211,154 @@ html body #connexionPopup p {
   border-radius: 10px;
   padding: 15px;
   text-align: center;
+}
+html body main .like {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 35px;
+  background-color: transparent;
+  border: none;
+  margin: 1vh 0 1vh 2vw;
+  color: rgba(202, 202, 202, 0.8);
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+html body main .anim {
+  animation: animLike 0.4s ease-in-out;
+}
+html body main .liked {
+  color: #f91880;
+}
+html body main .postsContainer {
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+  align-items: center;
+  gap: 2vh;
+  font-family: Arial, sans-serif;
+}
+html body main .postsContainer .noPost {
+  color: rgb(202, 202, 202);
+}
+html body main .postsContainer #skPost {
+  width: 75vw;
+  height: 30vh;
+  border-radius: 10px;
+  margin-top: 5vh;
+}
+html body main .postsContainer .post {
+  width: 67vw;
+  background-color: #262626;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: wrap row;
+  position: relative;
+}
+html body main .postsContainer .post .deleteModal {
+  background-image: url("../assets/imgs/svg/modal.svg");
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  transform: rotate(90deg);
+}
+html body main .postsContainer .post .modal {
+  position: absolute;
+  background-color: #262626;
+  border: 1px solid rgba(202, 202, 202, 0.2);
+  top: 35px;
+  right: -20px;
+  padding: 7px 10px 10px 10px;
+  border-radius: 5px;
+  height: 15px;
+  display: none;
+}
+html body main .postsContainer .post img {
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+html body main .postsContainer .post .ppName {
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: start;
+  align-items: center;
+  padding: 2vh 0 1.5vh 2vh;
+  gap: 3vw;
+}
+html body main .postsContainer .post .ppName img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+html body main .postsContainer .post .ppName .uName {
+  max-width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+html body main .postsContainer .post .postTxt {
+  width: 100%;
+  position: relative;
+  color: rgb(202, 202, 202);
+  font-family: Arial, sans-serif;
+}
+html body main .postsContainer .post .postTxt h3, html body main .postsContainer .post .postTxt h4, html body main .postsContainer .post .postTxt p {
+  margin: 0;
+  padding: 2vh 2vh 0 2vh;
+}
+html body main .postsContainer .post .postTxt .noteContainer {
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: start;
+  align-items: center;
+  padding: 2vh 2vh 0 2vh;
+}
+html body main .postsContainer .post .postTxt .noteContainer h4 {
+  padding: 0;
+  margin-right: 2vw;
+}
+html body main .postsContainer .post .postTxt .noteContainer .note {
+  color: #0099ff;
+}
+html body main .postsContainer .post .postTxt p {
+  font-size: 0.8rem;
+}
+html body main .postsContainer .post .postTxt .date {
+  font-size: 0.7rem;
+  color: rgb(202, 202, 202);
+  padding: 0.5vh 0 1vh 0;
+  opacity: 0.6;
+  margin: 0 0 1vh 3.5vw;
+  position: relative;
+}
+html body main .postsContainer .post .postTxt.zeroImg {
+  width: 100%;
+}
+html body main .postsContainer .post .postTxt.zeroImg .deleteBtn {
+  background-image: url("../assets/imgs/svg/deleteBtn.svg");
+  width: 15px;
+  height: 15px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+}
+html body main .postsContainer .post a {
+  color: rgb(202, 202, 202);
 }
 html body nav {
   background-color: rgb(16, 16, 16);

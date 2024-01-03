@@ -83,10 +83,13 @@ firebase.auth().onAuthStateChanged(async (user) => {
                 ref.set({
                     name: 'Utilisateur',
                     desc: 'Bienvenue sur mon profil !',
-                    nbPosts: 0,
-                    followers: 0,
                     defaultpp: 1,
+                    nbPosts: 0,
+                    followers: "",
+                    nbFollowers: 0,
                     followed: "",
+                    nbFollowed: 0,
+                    liked:"",
                     token: await getToken(),
                 })
             }

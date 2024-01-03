@@ -31,6 +31,7 @@ html {
                 position: absolute;
                 top: 5vw;
                 left: 70vw;
+                border-radius: 30px;
             }
 
             #publier.desac{
@@ -51,6 +52,7 @@ html {
                     width: 60vw;
                     padding: 15px 10px 15px 50px;
                     color: $input;
+                    border-radius: 30px;
                 }
 
                 #photo::before {
@@ -73,28 +75,11 @@ html {
 
                 input {
                     color: $blanc;
-                    width: 85vw;
+                    width: 75vw;
                     background-color: $input;
                     border: none;
-                    border-radius: 10px;
-                    padding: 2vh 10px 2vh 10px;
-                }
-
-                #autocomplete {
-                    padding: 2vh 10px 2vh 40px;
-                    width: 90vw;
-                }
-
-                #searchIcon::after {
-                    content: '';
-                    background-image: url('../assets/imgs/svg/search.svg');
-                    width: 20px;
-                    height: 20px;
-                    background-size: contain;
-                    display: block;
-                    position: absolute;
-                    transform: translateX(45%) translateY(-155%);
-                    background-repeat: no-repeat;
+                    border-radius: 30px;
+                    padding: 2vh 20px 2vh 20px;
                 }
 
                 input:focus {
@@ -185,6 +170,51 @@ html {
                     .active{
                         background-image: url('../assets/imgs/svg/star-active.svg');
                     }
+                }
+
+                #search-input{
+                    width: 65vw;
+                }
+
+                #search-container{
+                    position: relative;
+                    margin-bottom: 5vh;
+                }
+
+                #results-container {
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    z-index: 1000;
+                    display: none;
+                    border: 1px solid #ccc;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    background-color: #fff;
+                    max-height: 200px;
+                    overflow-y: auto;
+                    color: $input;
+                    width: 100%;
+                    margin: 0;
+                  }
+              
+                  .result-item {
+                    padding: 8px;
+                    cursor: pointer;
+                    border-top: 1px solid rgba($color: $blanc, $alpha: .3);
+                  }
+              
+                  .result-item:hover {
+                    background-color: #f0f0f0;
+                  }
+
+                  #reset-button{
+                    pointer-events: none;
+                    opacity: .5;
+                    border-radius: 30px;
+                    width: fit-content;
+                    padding: 10px 15px 10px 15px;
+                    margin-left: -30px;
+                    background-color: $blanc;
                 }
             }
         }

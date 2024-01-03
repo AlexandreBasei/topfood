@@ -14,63 +14,45 @@ let restaurant;
 let note = 0;
 let platEcrit = 0;
 let desac;
+let lieu;
 
 //Inistialisation de l'autocomplétion google places
-function initAutocomplete () {
-  autocomplete = new google.maps.places.Autocomplete(
-    document.getElementById('autocomplete'),
-    {
-      types: ['restaurant'],
-      componentRestrictions: {'country' : ['FR']},
-      fields: ['place_id', 'geometry', 'name']
-    });
+function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('autocomplete'),
+        {
+            types: ['restaurant'],
+            componentRestrictions: { 'country': ['FR'] },
+            fields: ['place_id', 'geometry', 'name']
+        });
 
     autocomplete.addListener('place_changed', onPlaceChanged);
 }
 
 //Sélection d'un lieu
 const onPlaceChanged = () => {
-  var place = autocomplete.getPlace();
+    var place = autocomplete.getPlace();
 
-  if (!place.geometry) {
-    document.getElementById('autocomplete').placeholder =
-    'Rechercher un restaurant';
-  } else {
-    let adresse = `https://www.google.com/maps/place/?q=place_id:${place.place_id}`;
-    restaurant = `<a href="${adresse}" target="_blank">${place.name}</a>`;
-    let detailsElement = document.getElementById('details');
-    detailsElement.classList.remove('details');
-    detailsElement.innerHTML = restaurant;
-    console.log(platEcrit);
-    
-    if (platEcrit != 0 && note != 0) {
-        console.log("dzad");
-        desac();
+    if (!place.geometry) {
+        document.getElementById('autocomplete').placeholder =
+            'Rechercher un restaurant';
+    } else {
+        let adresse = `https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}&query_place_id=${place.place_id}`;
+        restaurant = `<a href="${adresse}" target="_blank">${place.name}</a>`;
+        lieu = place.name;
+        let detailsElement = document.getElementById('details');
+        detailsElement.classList.remove('details');
+        detailsElement.innerHTML = restaurant;
+
+        if (platEcrit != 0 && note != 0) {
+            desac();
+        }
     }
-  }
 }
-
-//Sélection de la position actuelle de l'utilisateur
-// const getCurrentLocation = () => {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(
-//       (position) => {
-//         var detailsElement = document.getElementById('details');
-//         adresse = `https://www.google.com/maps/search/?api=1&query=${position.coords.latitude},${position.coords.longitude}`;
-//         detailsElement.innerHTML = `<p>Votre position</p>`;
-//       },
-//       (error) => {
-//         console.error('Error getting current location:', error);
-//       }
-//     );
-//   } else {
-//     alert('Géolocalisation non supportée par votre appareil');
-//   }
-// }
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    firebase.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged(async user => {
         const userId = user.uid;
 
         const stars = document.querySelectorAll('.star');
@@ -91,10 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 note = starIndex;
 
-                if (plat.value && note != 0 && restaurant) {
+                if (plat.innerText && note != 0 && restaurant) {
                     publication.classList.remove('desac');
                 }
-                else if (plat.value && note!= 0) {
+                else if (plat.innerText && note != 0) {
                     platEcrit = 1;
                 }
             });
@@ -104,9 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const ref = firebase.database().ref("users/" + userId + '/posts/' + pid);
         const ref2 = firebase.database().ref("users/" + userId + '/nbPosts');
+        const ref3 = firebase.database().ref("users/" + userId + '/plats');
 
         const publication = document.getElementById('publier');
-        const plat = document.getElementById("plat");
+        const plat = document.getElementById("detailsPlat");
         const avis = document.querySelector("textarea");
         let photoPrise = 0;
         let image;
@@ -123,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         publication.addEventListener("click", () => {
 
-            if (plat.value && note != 0 && restaurant) {
+            if (plat.innerText && note !== 0 && restaurant) {
 
                 if (photoPrise == 1) {
 
@@ -142,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             // Le téléchargement est terminé, vous pouvez exécuter des actions supplémentaires ici si nécessaire
                             ref.set({
                                 restaurant: restaurant,
-                                plat: plat.value,
+                                plat: plat.innerText,
                                 avis: avis.value,
                                 photo: photoPrise,
                                 note: note,
@@ -153,6 +136,19 @@ document.addEventListener('DOMContentLoaded', () => {
                                 return val + 1;
                             })
 
+                            ref3.transaction((val) => {
+                                if (val) {
+                                    return val + `${plat.innerText},`;
+                                }
+                                else {
+                                    return `${plat.innerText},`;
+                                }
+                            });
+
+                            const ref4 = firebase.database().ref("users/" + userId + '/restoNote/' + plat.innerText);
+
+                            ref4.child(lieu).set({note : note, lien : restaurant});
+
                             window.location.href = 'profil.html?userId=' + userId;
                         }
                     );
@@ -161,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 else {
                     ref.set({
                         restaurant: restaurant,
-                        plat: plat.value,
+                        plat: plat.innerText,
                         avis: avis.value,
                         photo: photoPrise,
                         note: note,
@@ -170,27 +166,95 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     ref2.transaction((val) => {
                         return val + 1;
-                    })
+                    });
+
+                    ref3.transaction((val) => {
+                        if (val) {
+                            return val + `${plat.innerText},`;
+                        }
+                        else {
+                            return `${plat.innerText},`;
+                        }
+                    });
+
+                    const ref4 = firebase.database().ref("users/" + userId + '/restoNote/' + plat.innerText);
+
+                    ref4.child(lieu).set({note : note, lien : restaurant});
 
                     window.location.href = 'profil.html?userId=' + userId;
                 }
             }
         })
 
-        plat.addEventListener('input', () => {
-            if (plat.value && note != 0 && restaurant) {
-                publication.classList.remove('desac');
+        let searchPlat = document.getElementById('search-input');
+        let resultsContainer = document.getElementById('results-container');
+        let detailsPlat = document.getElementById('detailsPlat');
+    
+        let plats = await firebase.database().ref(`plats`).once('value');
+        
+        const dataPlats = plats.val().split(',');
+    
+        // Fonction pour afficher les résultats
+        const showResults = (results) => {
+            resultsContainer.innerHTML = '';
+    
+            if (results.length === 0) {
+                resultsContainer.style.display = 'none';
+                return;
             }
-            else if (plat.value && note!=0) {
-                platEcrit = 1;
+    
+            results.forEach(result => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'result-item';
+                resultItem.textContent = result;
+    
+                resultItem.addEventListener('click', () => {
+                    searchPlat.value = result;
+                    resultsContainer.style.display = 'none';
+                    detailsPlat.innerHTML = result;
+    
+                    if (plat.innerText && note != 0 && restaurant) {
+                        publication.classList.remove('desac');
+                    }
+                    else if (plat.innerText && note != 0) {
+                        platEcrit = 1;
+                    }
+                    else if (!plat.innerText) {
+                        publication.classList.add('desac');
+                        platEcrit = 0;
+                    }
+                });
+    
+                resultsContainer.appendChild(resultItem);
+            });
+    
+            resultsContainer.style.display = 'block';
+        }
+    
+        // Gérer les événements de saisie
+        searchPlat.addEventListener('input', () => {
+            const inputValue = searchPlat.value.toLowerCase();
+            const filteredResults = dataPlats.filter(result => result.toLowerCase().includes(inputValue));
+            showResults(filteredResults);
+    
+            if (searchPlat.value === '') {
+                resultsContainer.style.display = "none";
             }
-            else if (!plat.value) {
-                console.log('nno');
-                publication.classList.add('desac');
-                platEcrit = 0;
+        });
+    
+        // Gérer les événements de clic en dehors du conteneur de résultats pour le fermer
+        document.addEventListener('click', (event) => {
+            if (!resultsContainer.contains(event.target) && event.target !== searchPlat) {
+                resultsContainer.style.display = 'none';
             }
-
-            console.log(platEcrit);
-        })
+        });
+    
+        searchPlat.addEventListener('click', () => {
+            if (searchPlat.value.trim() !== '') {
+              const inputValue = searchPlat.value.toLowerCase();
+              const filteredResults = dataPlats.filter(result => result.toLowerCase().includes(inputValue));
+              showResults(filteredResults);
+            }
+          });
     });
 });
